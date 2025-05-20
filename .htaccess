@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.cibos\.in$ [NC]
+RewriteRule ^(.*)$ https://cibos.in/$1 [L,R=301]

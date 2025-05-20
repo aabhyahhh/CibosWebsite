@@ -10,7 +10,9 @@ export default defineConfig({
         {
           src: '.htaccess',
           dest: '.' // places it directly in the dist folder
-        }
+        },
+
+        { src: 'src/assets', dest: '' }
       ]
     }),
     react()],

@@ -711,7 +711,7 @@ section {
   width: 30%;
   color: white;
   position: relative;
-  background-image: url("./assets/laari-image-left.png"); /* Use your actual image */
+  background-image: url("./assets/laari-image-left.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -856,7 +856,7 @@ section {
   width: 30%;
   color: white;
   position: relative;
-  background-image: url("./assets/solar-right.png"); /* Use your actual image */
+  background-image: url("./assets/solar-right.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -888,7 +888,7 @@ section {
   width: 30%;
   color: white;
   position: relative;
-  background-image: url("./assets/battery-left.png"); /* Use your actual image */
+  background-image: url("./assets/battery-left.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -919,7 +919,7 @@ section {
   width: 30%;
   color: white;
   position: relative;
-  background-image: url("./assets/digitalPlatform.png"); /* Use your actual image */
+  background-image: url("./assets/digitalPlatform.png");
   background-size: cover;
   background-position: center;
   display: flex;

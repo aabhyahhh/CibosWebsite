@@ -42,6 +42,7 @@ import a2 from "./assets/a2.jpg";
 import a3 from "./assets/a3.jpg";
 import a4 from "./assets/a4.jpg";
 import a5 from "./assets/a5.jpg";
+import LaariShowcase from "./Components/LaariShowcase";
 
 function App() {
   return (
@@ -188,63 +189,7 @@ function App() {
       </div>
 
       {/* Section 6 - New Vendor & Product Section */}
-      <section id="laari-section">
-        <div className="products">
-          <div className="card-container">
-            {/* Left Section - Vendor Statistics */}
-
-            <div className="vendor-card">
-              <div className="clean-cooking">
-                <p>
-                  LAARI<sup>TM</sup>
-                </p>
-              </div>
-              <div className="vendor-content">
-                <div className="vendor-stat">1.1 Crore+</div>
-                <div className="vendor-desc">
-                  street vendors in India lack stable, durable, and compliant
-                  infrastructure to run their businesses.
-                </div>
-              </div>
-            </div>
-
-            {/* Right Section - Product Details */}
-            <div className="product-card">
-              <div className="product-title">
-                Modular food carts, kiosks, and pods for micro-entrepreneurs
-              </div>
-
-              {/* Replace the existing slider with ProductSlider */}
-              <LaariProductSlider />
-            </div>
-
-            <div className="features-container">
-              <div className="feature">
-                <div className="feature-title">Customizable & Scalable</div>
-                <div className="feature-desc">
-                  39 standard designs for mass-customization
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">
-                  Quick Assembly & Portability
-                </div>
-                <div className="feature-desc">
-                  Easy to set up, move, and operate.
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">Integrated Utility Systems</div>
-                <div className="feature-desc">
-                  Can include solar panels, storage, and lighting.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <LaariShowcase />
 
       {/* Section 7 - Clean Cooking Stoves Section */}
       <section id="clean-cooking-section">

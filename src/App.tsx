@@ -43,6 +43,10 @@ import a3 from "./assets/a3.jpg";
 import a4 from "./assets/a4.jpg";
 import a5 from "./assets/a5.jpg";
 import LaariShowcase from "./Components/LaariShowcase";
+import CleanCookingShowcase from "./Components/CleanCookingShowcase";
+import CoolingBoxShowcase from "./Components/CoolingBoxShowcase";
+import LaariKhojoShowcase from "./Components/LaariKhojoShowcase";
+import DcShowcase from "./Components/DcShowcase";
 
 function App() {
   return (
@@ -190,175 +194,9 @@ function App() {
 
       {/* Section 6 - New Vendor & Product Section */}
       <LaariShowcase />
-
-      {/* Section 7 - Clean Cooking Stoves Section */}
-      <section id="clean-cooking-section">
-        <div className="products">
-          <div className="card-container">
-            <div className="features-container">
-              <div className="feature">
-                <div className="feature-title">
-                  Solar-Powered Off-Grid Cook Stove
-                </div>
-                <div className="feature-desc">
-                  No dependence on fuel or unreliable electricity
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">Infrared Cook Stove</div>
-                <div className="feature-desc">
-                  Faster heating, lower energy consumption, and safer use
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">
-                  Zero Emissions & Cost Savings
-                </div>
-                <div className="feature-desc">
-                  Reduces operational costs and environmental footprint
-                </div>
-              </div>
-            </div>
-
-            {/* Left Section - Product Details */}
-            <div className="product-card">
-              <div className="product-title">
-                Solar and infrared cookstoves for clean, <br />
-                efficient cooking
-              </div>
-              <CleanCookingSlider />
-            </div>
-
-            {/* Right Section - Vendor Statistics */}
-            <div className="vendor-card2">
-              <div className="clean-cooking">CLEAN COOKING</div>
-              <div className="vendor-content">
-                <div className="vendor-stat">More than 60%</div>
-                <div className="vendor-desc">
-                  of street food vendors still rely on LPG or solid fuels,
-                  leading to high costs and pollution.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 8 -*/}
-      <section id="temperature-controlled-section">
-        <div className="products">
-          <div className="card-container">
-            {/* Left Section - Vendor Statistics */}
-            <div className="vendor-card3">
-              <div className="clean-cooking">
-                TEMPERATURE CONTROLLED DELIVERY
-              </div>
-              <div className="vendor-content">
-                <div className="vendor-stat">40% of food loss</div>
-                <div className="vendor-desc">
-                  in India occurs due to lack of proper cold chain logistics and
-                  temperature control.
-                </div>
-              </div>
-            </div>
-
-            {/* Right Section - Product Details */}
-            <div className="product-card">
-              <div className="product-title">
-                Battery powered heating & cooling <br />
-                boxes for fresh delivery.
-              </div>
-              <TemperatureControlledSlider />
-            </div>
-
-            <div className="features-container">
-              <div className="feature">
-                <div className="feature-title">
-                  Maintains Optimal Temperature
-                </div>
-                <div className="feature-desc">
-                  Ensures food stays hot or cold as needed.
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">Battery-Powered & Portable</div>
-                <div className="feature-desc">
-                  Works Off-Grid, without external power dependencies
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">
-                  Ideal for Food, Agri & Pharma
-                </div>
-                <div className="feature-desc">
-                  Preserves food, dairy, vegetables and medicines during transit
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 9 - Clean Cooking Stoves Section */}
-      <section id="digital-platform-section">
-        <div className="products">
-          <div className="card-container">
-            <div className="features-container">
-              <div className="feature">
-                <div className="feature-title">
-                  Laari Khojo<sup>TM</sup> - Vendor Discovery App
-                </div>
-                <div className="feature-desc">
-                  Connects street vendors with customers in real time.
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">
-                  Whatsapp-Based Support System{" "}
-                </div>
-                <div className="feature-desc">
-                  Helps vendors apply for licenses and access resources.
-                </div>
-              </div>
-
-              <div className="feature">
-                <div className="feature-title">
-                  Localised & Multilingual Support
-                </div>
-                <div className="feature-desc">
-                  Ensures accessibility for diverse vendor communities.
-                </div>
-              </div>
-            </div>
-
-            {/* Left Section - Product Details */}
-            <div className="product-card">
-              <div className="product-title">
-                Vendor Discovery, Government Support, <br />
-                and Business Enablement Platform.
-              </div>
-              <img src={digitalPlatform} className="digital-platform" />
-            </div>
-
-            {/* Right Section - Vendor Statistics */}
-            <div className="vendor-card4">
-              <div className="clean-cooking">DIGITAL PLATFORM</div>
-              <div className="vendor-content">
-                <div className="vendor-stat">More than 60%</div>
-                <div className="vendor-desc">
-                  of street food vendors still rely on LPG or solid fuels,
-                  leading to high costs and pollution.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CleanCookingShowcase />
+      <CoolingBoxShowcase />
+      <LaariKhojoShowcase />
 
       {/* SUPPORTED BY */}
       <section className="customers-partners-section">

@@ -14,6 +14,16 @@ import portableIcon from "../assets/portableIcon.png";
 import safety1Icon from "../assets/safety1Icon.png";
 import costIcon from "../assets/costIcon.png";
 
+// Add imports for the new icons based on the image
+import deliveryIcon from "../assets/deliveryIcon1.png"; // Placeholder path
+import streetVendorIcon from "../assets/streetVendorIcon.png"; // Placeholder path
+import alertIcon from "../assets/alertIcon.png"; // Placeholder path
+
+// Add imports for the new icons based on the images
+import agriculturalIcon from "../assets/agriculturalIcon.png"; // Placeholder path for wheat icon
+import pharmaIcon from "../assets/pharmaIcon.png"; // Placeholder path for factory icon
+// Ensure you have actual assets at these paths or update the paths
+
 
 const TABS = [
   "Heated delivery box",
@@ -37,11 +47,9 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Food delivery",
-      "Street vending",
-      "Agricultural logistics",
-      "Pharmaceuticals and vaccinations",
-      "Defense, emergency and disaster relief",
+      { text: "Food delivery", icon: deliveryIcon }, // Assuming deliveryIcon is the correct icon for heated food delivery
+      { text: "Street vending", icon: streetVendorIcon }, // Assuming streetVendorIcon is correct for heated street vending
+      { text: "Defense, emergency and disaster relief", icon: alertIcon }, // Assuming alertIcon is correct for heated defense/emergency
     ],
     images: [cool1, cool2, cool3, cool4, cool5], // Use imported heated images
     rightFeatures: [
@@ -65,11 +73,11 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Food Delivery",
-      "Street Vending",
-      "Agricultural Logistics",
-      "Pharmaceuticals and Vaccinations",
-      "Defense, Emergency and Disaster Relief",
+      { text: "Food Delivery", icon: deliveryIcon },
+      { text: "Street Vending", icon: streetVendorIcon },
+      { text: "Agricultural Logistics", icon: agriculturalIcon },
+      { text: "Pharmaceuticals and Vaccinations", icon: pharmaIcon },
+      { text: "Defense, Emergency and Disaster Relief", icon: alertIcon },
     ],
     images: [heat1, heat2], // Use imported cooling images
     rightFeatures: [
@@ -92,10 +100,10 @@ const tabContent = [
     ],
     leftTitle2: "Use Cases and Applications",
     leftList2: [
-      "Street Vending",
-      "Agricultural Logistics",
-      "Pharmaceuticals and Vaccinations",
-      "Defense, Emergency and Disaster Relief",
+      { text: "Street Vending", icon: streetVendorIcon }, // Example: using the cold box street vending icon
+      { text: "Agricultural Logistics", icon: agriculturalIcon }, // Example: using the agricultural icon
+      { text: "Pharmaceuticals and Vaccinations", icon: pharmaIcon }, // Example: using the pharma icon
+      { text: "Defense, Emergency and Disaster Relief", icon: alertIcon }, // Example: using the defense icon
     ],
     images: ["../assets/Dc-1.png"],
     rightFeatures: [
@@ -411,29 +419,44 @@ export default function CoolingBoxShowcase() {
                 ))}
               </ul>
               
-              <div style={{ 
-                color: "#117b8b", 
-                fontWeight: 700, 
-                fontSize: 18, 
+              <div style={{
+                color: "#117b8b",
+                fontWeight: 700,
+                fontSize: 18,
                 marginBottom: 16,
                 borderBottom: "2px solid #e0f7fa",
                 paddingBottom: 8
               }}>
                 {tab.leftTitle2}
               </div>
-              <ul style={{ 
-                color: "#555", 
-                fontWeight: 400, 
+              <ul style={{
+                color: "#555",
+                fontWeight: 400,
                 fontSize: 15,
-                paddingLeft: 20,
-                lineHeight: 1.6
+                lineHeight: 1.6,
+                listStyleType: "none", // Remove default list bullets
+                padding: 0 // Remove default padding
               }}>
                 {tab.leftList2.map((item, i) => (
-                  <li key={i} style={{ 
-                    marginBottom: 8,
-                    listStyleType: "disc"
+                  <li key={i} style={{
+                    marginBottom: 12, // Increased space between list items
+                    display: "flex", // Use flexbox for icon and text alignment
+                    alignItems: "center", // Vertically center icon and text
                   }}>
-                    {item}
+                    {item.icon && (
+                      <img
+                        src={item.icon} // Use icon path from the data
+                        alt={`${item.text} icon`}
+                        style={{
+                          width: 18, // Adjust size as needed
+                          height: 18, // Adjust size as needed
+                          marginRight: 10, // Space between icon and text
+                          objectFit: "contain",
+                          filter: "none" // Keep filter as is
+                        }}
+                      />
+                    )}
+                    {item.text} {/* Use text from the data */}
                   </li>
                 ))}
               </ul>

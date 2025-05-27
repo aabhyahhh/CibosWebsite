@@ -36,7 +36,6 @@ const tabContent = [
     ],
     images: [ir1, ir2, ir3], // Use imported images for carousel
     rightFeatures: [
-      { icon: "../assets/universalIcon.png", text: "Universal Compatibility" }, // Placeholder icon
       { icon: "../assets/energyIcon.png", text: "Energy Efficient" }, // Placeholder icon
       { icon: "../assets/heatingIcon.png", text: "Rapid Heating" }, // Placeholder icon
       { icon: "../assets/safetyIcon.png", text: "Safety First" }, // Placeholder icon
@@ -65,8 +64,7 @@ const tabContent = [
     images: [a1, a2], // Placeholder image
     rightFeatures: [
       { icon: "../assets/operationIcon.png", text: "Truly Off-Grid Operation" }, // Placeholder icon
-      { icon: "../assets/dcIcon.png", text: "12V DC Compatibility" }, // Placeholder icon
-      { icon: "../assets/powerIcon.png", text: "Low Power Consumption" }, // Placeholder icon
+      { icon: "../assets/safetyIcon.png", text: "Safe & Clean Cooking" }, // Placeholder icon
       { icon: "../assets/batteryIcon.png", text: "Battery-Compatible for Night Use" }, // Placeholder icon
       { icon: "../assets/smartIcon.png", text: "Smart Usage Monitoring (Optional)" }, // Placeholder icon
     ],

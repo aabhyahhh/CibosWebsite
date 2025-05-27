@@ -46,7 +46,6 @@ import LaariShowcase from "./Components/LaariShowcase";
 import CleanCookingShowcase from "./Components/CleanCookingShowcase";
 import CoolingBoxShowcase from "./Components/CoolingBoxShowcase";
 import LaariKhojoShowcase from "./Components/LaariKhojoShowcase";
-import DcShowcase from "./Components/DcShowcase";
 
 function App() {
   return (
@@ -193,10 +192,25 @@ function App() {
       </div>
 
       {/* Section 6 - New Vendor & Product Section */}
-      <LaariShowcase />
-      <CleanCookingShowcase />
-      <CoolingBoxShowcase />
-      <LaariKhojoShowcase />
+      {/* Laari Showcase Section */}
+      <section id="laari-section">
+        <LaariShowcase />
+      </section>
+
+      {/* Clean Cooking Showcase Section */}
+      <section id="clean-cooking-section">
+        <CleanCookingShowcase />
+      </section>
+
+      {/* Temperature Controlled Delivery Showcase Section */}
+      <section id="temperature-controlled-section">
+        <CoolingBoxShowcase />
+      </section>
+
+      {/* Digital Platform Showcase Section */}
+      <section id="digital-platform-section">
+        <LaariKhojoShowcase />
+      </section>
 
       {/* SUPPORTED BY */}
       <section className="customers-partners-section">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 
 //Icons
 import flatpack from "../assets/l-flatpack.png";
@@ -16,6 +17,35 @@ import seat from "../assets/seatIcon.png";
 import operate from "../assets/operateIcon.png";
 import reuse from "../assets/reuseIcon.png";
 import customer from "../assets/customerIcon.png";
+
+// Add imports for the leftList2 icons based on the image crops
+// Please replace these with the actual paths to your icon assets
+import teaIcon from "../assets/teaIcon.png"; // Placeholder
+import streetFoodCartIcon from "../assets/streetVendorIcon.png"; // Placeholder
+import fashionIcon from "../assets/fashionIcon.png"; // Placeholder
+import kioskIcon from "../assets/kioskIcon.png"; // Placeholder
+import bookStallIcon from "../assets/bookStallIcon.png"; // Placeholder
+import infoBoothIcon from "../assets/infoBoothIcon.png"; // Placeholder
+import juiceStallIcon from "../assets/juiceStallIcon.png"; // Placeholder
+import iceCreamIcon from "../assets/juiceStallIcon.png"; // Placeholder
+import produceCartIcon from "../assets/streetVendorIcon.png"; // Placeholder
+import deliveryBikeIcon from "../assets/deliveryBikeIcon.png"; // Placeholder (assuming FMCG micro-delivery)
+import tailoringIcon from "../assets/tailoringIcon.png"; // Placeholder
+import foodTruckIcon from "../assets/streetVendorIcon.png"; // Placeholder
+import juiceTruckIcon from "../assets/juiceStallIcon.png"; // Placeholder
+import cateringVanIcon from "../assets/cateringVanIcon.png"; // Placeholder
+import promotionTruckIcon from "../assets/promotionTruckIcon.png"; // Placeholder
+import homeCookedIcon from "../assets/homeCookedIcon.png"; // Placeholder
+import shgIcon from "../assets/shgIcon.png"; // Placeholder
+import clothingIcon from "../assets/fashionIcon.png"; // Placeholder
+import stationeryIcon from "../assets/stationeryIcon.png"; // Placeholder
+import popUpIcon from "../assets/popUpIcon.png"; // Placeholder
+import hotelKioskIcon from "../assets/kioskIcon.png"; // Placeholder
+import samplingCartIcon from "../assets/stationeryIcon.png"; // Placeholder
+import beverageTrolleyIcon from "../assets/juiceStallIcon.png"; // Placeholder
+import salonTrolleyIcon from "../assets/salonTrolleyIcon.png"; // Placeholder
+import rollingKioskIcon from "../assets/fashionIcon.png"; // Placeholder
+import miniBarIcon from "../assets/miniBarIcon.png"; // Placeholder
 
 //Laari Flex
 import l1 from "../assets/l1.png";
@@ -84,10 +114,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Tea, coffee, and beverage stalls",
-      "Ready-to-eat snacks and street food",
-      "Fashion accessories and jewellery displays",
-      "Brand activations and sampling kiosks",
+      { text: "Tea, coffee, and beverage stalls", icon: teaIcon },
+      { text: "Ready-to-eat snacks and street food", icon: streetFoodCartIcon },
+      { text: "Fashion accessories and jewellery displays", icon: fashionIcon },
+      { text: "Brand activations and sampling kiosks", icon: kioskIcon },
     ],
     images: [l5, l2, l1, l4, l3],
     rightFeatures: [
@@ -114,10 +144,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Chaat, sandwich, and roll counters",
-      "Mobile book or toy stalls",
-      "NGO or government info booths",
-      "Juice or lassi stations",
+      { text: "Chaat, sandwich, and roll counters", icon: streetFoodCartIcon },
+      { text: "Mobile book or toy stalls", icon: bookStallIcon },
+      { text: "NGO or government info booths", icon: infoBoothIcon },
+      { text: "Juice or lassi stations", icon: juiceStallIcon },
     ],
     images: [lv1, lv2, lv3],
     rightFeatures: [
@@ -144,10 +174,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Ice creams and cold beverages",
-      "Fresh produce or snacks",
-      "FMCG micro-delivery",
-      "Tailoring/repair services",
+      { text: "Ice creams and cold beverages", icon: iceCreamIcon },
+      { text: "Fresh produce or snacks", icon: produceCartIcon },
+      { text: "FMCG micro-delivery", icon: deliveryBikeIcon },
+      { text: "Tailoring/repair services", icon: tailoringIcon },
     ],
     images: [lt1, lt2, lt3, lt4],
     rightFeatures: [
@@ -174,10 +204,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Fast food or fusion cuisine trucks",
-      "Juice or dessert trucks",
-      "Catering vans",
-      "Corporate promotion trucks",
+      { text: "Fast food or fusion cuisine trucks", icon: foodTruckIcon },
+      { text: "Juice or dessert trucks", icon: juiceTruckIcon },
+      { text: "Catering vans", icon: cateringVanIcon },
+      { text: "Corporate promotion trucks", icon: promotionTruckIcon },
     ],
     images: [lm1, lm2, lm3, lm4],
     rightFeatures: [
@@ -204,10 +234,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Home-cooked snacks and pickles",
-      "SHG group products",
-      "Clothing and Daily Essentials",
-      "Accessories and stationery",
+      { text: "Home-cooked snacks and pickles", icon: homeCookedIcon },
+      { text: "SHG group products", icon: shgIcon },
+      { text: "Clothing and Daily Essentials", icon: clothingIcon },
+      { text: "Accessories and stationery", icon: stationeryIcon },
     ],
     images: [ls1, ls2, ls3, ls4, ls5],
     rightFeatures: [
@@ -234,10 +264,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Brand-led pop-ups and experiential marketing",
-      "Hotel lobby kiosks or café extensions",
-      "Ready-to-eat snacks and street food",
-      "In-store sampling carts",
+      { text: "Brand-led pop-ups and experiential marketing", icon: popUpIcon },
+      { text: "Hotel lobby kiosks or café extensions", icon: hotelKioskIcon },
+      { text: "Ready-to-eat snacks and street food", icon: streetFoodCartIcon },
+      { text: "In-store sampling carts", icon: samplingCartIcon },
     ],
     images: [lc1, lc2, lc3, lc4, lc5],
     rightFeatures: [
@@ -264,10 +294,10 @@ const tabContent = [
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      "Beverage service trolleys",
-      "Salon or wellness trolley setups",
-      "Branded rolling kiosks for events or exhibitions",
-      "Mini bar setups for room service or banquet floors",
+      { text: "Beverage service trolleys", icon: beverageTrolleyIcon },
+      { text: "Salon or wellness trolley setups", icon: salonTrolleyIcon },
+      { text: "Branded rolling kiosks for events or exhibitions", icon: rollingKioskIcon },
+      { text: "Mini bar setups for room service or banquet floors", icon: miniBarIcon },
     ],
     images: [lse1, lse2, lse3],
     rightFeatures: [
@@ -316,7 +346,6 @@ function SimpleCarousel({ images }: { images: string[] }) {
         borderRadius: 16,
         overflow: "hidden",
         position: "relative",
-        boxShadow: "0 4px 20px rgba(0,0,0,0.15)"
       }}>
         <img
           src={images[idx]}
@@ -332,6 +361,7 @@ function SimpleCarousel({ images }: { images: string[] }) {
         />
       </div>
 
+
       {/* Navigation arrows */}
       {images.length > 1 && (
         <>
@@ -341,14 +371,13 @@ function SimpleCarousel({ images }: { images: string[] }) {
               left: -20,
               top: "50%",
               transform: "translateY(-50%)",
-              background: "linear-gradient(135deg, #117b8b 0%, #0a3a43 100%)",
+              background: "transparent",
               border: "none",
               borderRadius: "50%",
               width: 48,
               height: 48,
               cursor: "pointer",
-              color: "#ffffff",
-              boxShadow: "0 4px 16px rgba(17, 123, 139, 0.4)",
+              color: "#cdcdcd",
               zIndex: 3,
               display: "flex",
               alignItems: "center",
@@ -359,6 +388,16 @@ function SimpleCarousel({ images }: { images: string[] }) {
               opacity: animating ? 0.5 : 1
             }}
             onClick={() => handleArrow(-1)}
+            onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (!animating) {
+                (e.target as HTMLButtonElement).style.color = "rgba(17, 123, 139, 0.9)";
+              }
+            }}
+            onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (!animating) {
+                (e.target as HTMLButtonElement).style.color = "#cdcdcd";
+              }
+            }}
             aria-label="Previous image"
             disabled={animating}
           >
@@ -370,14 +409,13 @@ function SimpleCarousel({ images }: { images: string[] }) {
               right: -20,
               top: "50%",
               transform: "translateY(-50%)",
-              background: "linear-gradient(135deg, #117b8b 0%, #0a3a43 100%)",
+              background: "transparent",
               border: "none",
               borderRadius: "50%",
               width: 48,
               height: 48,
               cursor: "pointer",
-              color: "#ffffff",
-              boxShadow: "0 4px 16px rgba(17, 123, 139, 0.4)",
+              color: "#cdcdcd",
               zIndex: 3,
               display: "flex",
               alignItems: "center",
@@ -388,6 +426,16 @@ function SimpleCarousel({ images }: { images: string[] }) {
               opacity: animating ? 0.5 : 1
             }}
             onClick={() => handleArrow(1)}
+            onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (!animating) {
+                (e.target as HTMLButtonElement).style.color = "rgba(17, 123, 139, 0.9)";
+              }
+            }}
+            onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (!animating) {
+                (e.target as HTMLButtonElement).style.color = "#cdcdcd";
+              }
+            }}
             aria-label="Next image"
             disabled={animating}
           >
@@ -439,8 +487,8 @@ function SimpleCarousel({ images }: { images: string[] }) {
           position: "absolute",
           top: 16,
           right: 16,
-          background: "rgba(17, 123, 139, 0.9)",
-          color: "#ffffff",
+          background: "transparent",
+          color: "#cdcdcd",
           padding: "6px 12px",
           borderRadius: 20,
           fontSize: 14,
@@ -457,25 +505,90 @@ function SimpleCarousel({ images }: { images: string[] }) {
 
 export default function LaariShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const tab = tabContent[activeTab];
+  const [direction, setDirection] = useState(0);
+  const { scrollYProgress } = useScroll();
 
   const handleTabChange = (newTabIndex: number) => {
-    if (newTabIndex === activeTab || isTransitioning) return;
+    if (newTabIndex === activeTab) return;
     
-    setIsTransitioning(true);
+    setDirection(newTabIndex > activeTab ? 1 : -1);
     setActiveTab(newTabIndex);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 500);
+  };
+
+  const tab = tabContent[activeTab];
+
+  // Enhanced animation variants
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.95
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      scale: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+      scale: 0.95
+    })
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemFadeIn = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: { 
+        duration: 0.5,
+        ease: [0.6, -0.05, 0.01, 0.99]
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.6, -0.05, 0.01, 0.99]
+      }
+    }
   };
 
   return (
-    <section style={{ 
+    <div style={{ 
       background: "linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)", 
-      padding: 0,
-      minHeight: "100vh"
+      minHeight: "100vh",
+      minWidth: "100vw",
+      overflow: "hidden"
     }}>
       {/* Header */}
       <div style={{ 
@@ -490,7 +603,7 @@ export default function LaariShowcase() {
           letterSpacing: 2,
           margin: 0,
           lineHeight: 1.1,
-          textShadow: "0 2px 8px rgba(0,0,0,0.1)"
+          textShadow: "0 4px 16px rgba(17, 123, 139, 0.2)"
         }}>
           {tab.title}
         </h1>
@@ -507,7 +620,7 @@ export default function LaariShowcase() {
         </div>
       </div>
 
-      {/* Info bar */}
+      {/* Animated Info Bar */}
       <div style={{
         display: "flex",
         justifyContent: "center",
@@ -523,7 +636,7 @@ export default function LaariShowcase() {
           fontSize: 16,
           maxWidth: 1200,
           textAlign: "center",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
+          boxShadow: "0 8px 32px rgba(17, 123, 139, 0.25)",
           lineHeight: 1.4
         }}>
           <div style={{ marginBottom: 8 }}>{tab.infoBar[0]}</div>
@@ -531,7 +644,7 @@ export default function LaariShowcase() {
         </div>
       </div>
 
-      {/* Main content with integrated navigation */}
+      {/* Main Content Container */}
       <div style={{
         maxWidth: 1400,
         margin: "0 auto",
@@ -541,141 +654,228 @@ export default function LaariShowcase() {
         <div style={{
           background: "#ffffff",
           borderRadius: 24,
-          boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-          transition: "all 0.5s ease",
-          opacity: isTransitioning ? 0.8 : 1,
-          transform: isTransitioning ? "translateY(10px)" : "translateY(0)",
+          boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
           overflow: "hidden"
         }}>
-          {/* Content Area */}
-          <div style={{ padding: 60 }}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 2fr 1fr",
-              gap: 60,
-              alignItems: "start"
-            }}>
-              {/* Left column */}
-              <div>
-                <div style={{ 
-                  color: "#117b8b", 
-                  fontWeight: 700, 
-                  fontSize: 18, 
-                  marginBottom: 16,
-                  borderBottom: "2px solid #e0f7fa",
-                  paddingBottom: 8
-                }}>
-                  {tab.leftTitle}
-                </div>
-                <ul style={{ 
-                  color: "#555", 
-                  fontWeight: 400, 
-                  fontSize: 15, 
-                  marginBottom: 28,
-                  paddingLeft: 20,
-                  lineHeight: 1.6
-                }}>
-                  {tab.leftList.map((item, i) => (
-                    <li key={i} style={{ 
-                      marginBottom: 8,
-                      listStyleType: "disc"
-                    }}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                
-                <div style={{ 
-                  color: "#117b8b", 
-                  fontWeight: 700, 
-                  fontSize: 18, 
-                  marginBottom: 16,
-                  borderBottom: "2px solid #e0f7fa",
-                  paddingBottom: 8
-                }}>
-                  {tab.leftTitle2}
-                </div>
-                <ul style={{ 
-                  color: "#555", 
-                  fontWeight: 400, 
-                  fontSize: 15,
-                  paddingLeft: 20,
-                  lineHeight: 1.6
-                }}>
-                  {tab.leftList2.map((item, i) => (
-                    <li key={i} style={{ 
-                      marginBottom: 8,
-                      listStyleType: "disc"
-                    }}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Center carousel */}
-              <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "relative"
-              }}>
-                <SimpleCarousel images={tab.images || []} />
-              </div>
-
-              {/* Right features */}
-              <div>
-                <div style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 32,
-                  alignItems: "center"
-                }}>
-                  {tab.rightFeatures.map((f, i) => (
-                    <div key={i} style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}>
-                      <img 
-                        src={f.icon} 
-                        alt={f.text} 
+          {/* Animated Content Area */}
+          <div style={{ padding: 60, minHeight: 500 }}>
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={`content-${activeTab}`}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.5 },
+                  scale: { duration: 0.5 }
+                }}
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 2fr 1fr",
+                  gap: 60,
+                  alignItems: "start",
+                  height: "100%"
+                }}
+              >
+                {/* Left Column */}
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <motion.div 
+                    variants={itemFadeIn}
+                    style={{ 
+                      color: "#117b8b", 
+                      fontWeight: 700, 
+                      fontSize: 18, 
+                      marginBottom: 16,
+                      borderBottom: "3px solid #e0f7fa",
+                      paddingBottom: 8
+                    }}
+                  >
+                    {tab.leftTitle}
+                  </motion.div>
+                  <motion.ul 
+                    variants={staggerContainer}
+                    style={{ 
+                      color: "#555", 
+                      fontWeight: 400, 
+                      fontSize: 15, 
+                      marginBottom: 32,
+                      paddingLeft: 20,
+                      lineHeight: 1.7
+                    }}
+                  >
+                    {tab.leftList.map((item, i) => (
+                      <motion.li 
+                        key={i} 
+                        variants={itemFadeIn}
                         style={{ 
-                          width: 48, 
-                          height: 48, 
-                          objectFit: "contain", 
+                          marginBottom: 10,
+                          listStyleType: "disc"
+                        }}
+                      >
+                        {item}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                  
+                  <motion.div 
+                    variants={itemFadeIn}
+                    style={{ 
+                      color: "#117b8b", 
+                      fontWeight: 700, 
+                      fontSize: 18, 
+                      marginBottom: 16,
+                      borderBottom: "3px solid #e0f7fa",
+                      paddingBottom: 8
+                    }}
+                  >
+                    {tab.leftTitle2}
+                  </motion.div>
+                  <motion.ul 
+                    variants={staggerContainer}
+                    style={{
+                      color: "#555",
+                      fontWeight: 400,
+                      fontSize: 15,
+                      lineHeight: 1.6,
+                      listStyleType: "none",
+                      padding: 0
+                    }}
+                  >
+                    {tab.leftList2.map((item, i) => (
+                      <motion.li 
+                        key={i} 
+                        variants={itemFadeIn}
+                        style={{
                           marginBottom: 12,
-                          filter: "none"
-                        }} 
-                      />
-                      <span style={{
-                        color: "#0a3a43",
-                        fontWeight: 500,
-                        fontSize: 12,
-                        textAlign: "center",
-                        lineHeight: 1.3,
-                        width: "120px"
-                      }}>
-                        {f.text}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        {item.icon && (
+                          <motion.img
+                            variants={itemFadeIn}
+                            src={item.icon}
+                            alt={`${item.text} icon`}
+                            style={{
+                              width: 18,
+                              height: 18,
+                              marginRight: 10,
+                              objectFit: "contain",
+                              filter: "none"
+                            }}
+                          />
+                        )}
+                        {item.text}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
+                </motion.div>
+
+                {/* Center Carousel */}
+                <motion.div 
+                  variants={itemFadeIn}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ delay: 0.2 }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    position: "relative"
+                  }}
+                >
+                  <SimpleCarousel images={tab.images || []} />
+                </motion.div>
+
+                {/* Right Features */}
+                <motion.div 
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 32,
+                    alignItems: "center"
+                  }}>
+                    {tab.rightFeatures.map((f, i) => (
+                      <motion.div 
+                        key={i} 
+                        variants={itemFadeIn}
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center"
+                        }}
+                      >
+                        <motion.img 
+                          variants={itemFadeIn}
+                          src={f.icon} 
+                          alt={f.text} 
+                          style={{ 
+                            width: 48, 
+                            height: 48, 
+                            objectFit: "contain", 
+                            marginBottom: 12,
+                            filter: "none"
+                          }} 
+                        />
+                        <motion.span 
+                          variants={itemFadeIn}
+                          style={{
+                            color: "#0a3a43",
+                            fontWeight: 500,
+                            fontSize: 12,
+                            textAlign: "center",
+                            lineHeight: 1.3,
+                            width: "120px"
+                          }}
+                        >
+                          {f.text}
+                        </motion.span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          {/* Bottom navigation bar - aligned with white box bottom */}
+          {/* Enhanced Navigation Bar */}
           <div style={{
             display: "flex",
             justifyContent: "center",
             alignItems: "stretch",
             background: "#117b8b",
-            minHeight: 60
+            minHeight: 60,
+            position: "relative"
           }}>
+            {/* Active tab indicator */}
+            <motion.div
+              layoutId="activeTab"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: `${(activeTab / TABS.length) * 100}%`,
+                width: `${100 / TABS.length}%`,
+                height: "100%",
+                background: "transparent",
+                borderTop: "4px solid #ffffff"
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+
             {TABS.map((tabName, idx) => (
-              <button
+              <motion.button
                 key={tabName}
                 onClick={() => handleTabChange(idx)}
                 style={{
@@ -692,13 +892,13 @@ export default function LaariShowcase() {
                   flex: 1,
                   whiteSpace: "nowrap"
                 }}
-                onMouseOver={(e) => {
+                onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
                   if (activeTab !== idx) {
                     (e.target as HTMLButtonElement).style.color = "#ffffff";
                     (e.target as HTMLButtonElement).style.borderBottom = "4px solid rgba(255,255,255,0.3)";
                   }
                 }}
-                onMouseOut={(e) => {
+                onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
                   if (activeTab !== idx) {
                     (e.target as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
                     (e.target as HTMLButtonElement).style.borderBottom = "4px solid transparent";
@@ -706,11 +906,11 @@ export default function LaariShowcase() {
                 }}
               >
                 {tabName}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-};
+}

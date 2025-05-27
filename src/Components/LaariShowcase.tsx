@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { AnimatePresence, motion, useScroll, useTransform, useInView } from "framer-motion";
 
 //Icons
 import flatpack from "../assets/l-flatpack.png";
@@ -507,6 +507,18 @@ export default function LaariShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const [direction, setDirection] = useState(0);
   const { scrollYProgress } = useScroll();
+  
+  // Add refs for scroll animations
+  const headerRef = useRef(null);
+  const infoBarRef = useRef(null);
+  const contentRef = useRef(null);
+  const navRef = useRef(null);
+
+  // Add useInView hooks for scroll-triggered animations
+  const isHeaderInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const isInfoBarInView = useInView(infoBarRef, { once: true, amount: 0.3 });
+  const isContentInView = useInView(contentRef, { once: true, amount: 0.1 });
+  const isNavInView = useInView(navRef, { once: true, amount: 0.3 });
 
   const handleTabChange = (newTabIndex: number) => {
     if (newTabIndex === activeTab) return;
@@ -583,80 +595,134 @@ export default function LaariShowcase() {
     }
   };
 
+  // Add scroll-based animation variants
+  const scrollFadeUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.8,
+        ease: [0.6, -0.05, 0.01, 0.99]
+      }
+    }
+  };
+
+  const scrollFadeIn = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
     <div style={{ 
-      background: "linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)", 
+      background: "white", 
       minHeight: "100vh",
       minWidth: "100vw",
       overflow: "hidden"
     }}>
-      {/* Header */}
-      <div style={{ 
-        textAlign: "center", 
-        paddingTop: 40,
-        paddingBottom: 20
-      }}>
-        <h1 style={{
-          color: "#117b8b",
-          fontWeight: 900,
-          fontSize: 48,
-          letterSpacing: 2,
-          margin: 0,
-          lineHeight: 1.1,
-          textShadow: "0 4px 16px rgba(17, 123, 139, 0.2)"
-        }}>
+      {/* Header with scroll animation */}
+      <motion.div 
+        ref={headerRef}
+        initial="hidden"
+        animate={isHeaderInView ? "visible" : "hidden"}
+        variants={scrollFadeUp}
+        style={{ 
+          textAlign: "center", 
+          paddingTop: 40,
+          paddingBottom: 20
+        }}
+      >
+        <motion.h1 
+          variants={scrollFadeUp}
+          style={{
+            color: "#117b8b",
+            fontWeight: 900,
+            fontSize: 48,
+            letterSpacing: 2,
+            margin: 0,
+            lineHeight: 1.1,
+            textShadow: "0 4px 16px rgba(17, 123, 139, 0.2)"
+          }}
+        >
           {tab.title}
-        </h1>
-        <div style={{
-          color: "#117b8b",
-          fontWeight: 400,
-          fontSize: 24,
-          fontStyle: "italic",
-          marginTop: 8,
-          letterSpacing: 0.5,
-          opacity: 0.9
-        }}>
+        </motion.h1>
+        <motion.div 
+          variants={scrollFadeUp}
+          style={{
+            color: "#117b8b",
+            fontWeight: 400,
+            fontSize: 24,
+            fontStyle: "italic",
+            marginTop: 8,
+            letterSpacing: 0.5,
+            opacity: 0.9
+          }}
+        >
           {tab.subtitle}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* Animated Info Bar */}
-      <div style={{
-        display: "flex",
-        justifyContent: "center",
-        padding: "0 40px",
-        marginBottom: 40
-      }}>
-        <div style={{
-          background: "linear-gradient(90deg, #0a3a43 0%, #117b8b 100%)",
-          color: "#ffffff",
-          borderRadius: 20,
-          padding: "24px 60px",
-          fontWeight: 600,
-          fontSize: 16,
-          maxWidth: 1200,
-          textAlign: "center",
-          boxShadow: "0 8px 32px rgba(17, 123, 139, 0.25)",
-          lineHeight: 1.4
-        }}>
-          <div style={{ marginBottom: 8 }}>{tab.infoBar[0]}</div>
-          <div>{tab.infoBar[1]}</div>
-        </div>
-      </div>
+      {/* Info Bar with scroll animation */}
+      <motion.div 
+        ref={infoBarRef}
+        initial="hidden"
+        animate={isInfoBarInView ? "visible" : "hidden"}
+        variants={scrollFadeUp}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "0 40px",
+          marginBottom: 40
+        }}
+      >
+        <motion.div 
+          variants={scrollFadeUp}
+          style={{
+            background: "linear-gradient(90deg, #0a3a43 0%, #117b8b 100%)",
+            color: "#ffffff",
+            borderRadius: 20,
+            padding: "24px 60px",
+            fontWeight: 600,
+            fontSize: 16,
+            maxWidth: 1200,
+            textAlign: "center",
+            boxShadow: "0 8px 32px rgba(17, 123, 139, 0.25)",
+            lineHeight: 1.4
+          }}
+        >
+          <motion.div variants={scrollFadeUp} style={{ marginBottom: 8 }}>{tab.infoBar[0]}</motion.div>
+          <motion.div variants={scrollFadeUp}>{tab.infoBar[1]}</motion.div>
+        </motion.div>
+      </motion.div>
 
-      {/* Main Content Container */}
-      <div style={{
-        maxWidth: 1400,
-        margin: "0 auto",
-        padding: "0 40px",
-        marginBottom: 40
-      }}>
-        <div style={{
-          background: "#ffffff",
-          borderRadius: 24,
-          boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
-          overflow: "hidden"
-        }}>
+      {/* Main Content Container with scroll animation */}
+      <motion.div 
+        ref={contentRef}
+        initial="hidden"
+        animate={isContentInView ? "visible" : "hidden"}
+        variants={scrollFadeIn}
+        style={{
+          maxWidth: 1400,
+          margin: "0 auto",
+          padding: "0 40px",
+          marginBottom: 40
+        }}
+      >
+        <motion.div 
+          variants={scrollFadeUp}
+          style={{
+            background: "#ffffff",
+            borderRadius: 24,
+            boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
+            overflow: "hidden"
+          }}
+        >
           {/* Animated Content Area */}
           <div style={{ padding: 60, minHeight: 500 }}>
             <AnimatePresence mode="wait" custom={direction}>
@@ -909,8 +975,74 @@ export default function LaariShowcase() {
               </motion.button>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Navigation Bar with scroll animation */}
+      <motion.div 
+        ref={navRef}
+        initial="hidden"
+        animate={isNavInView ? "visible" : "hidden"}
+        variants={scrollFadeUp}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "stretch",
+          background: "#117b8b",
+          minHeight: 60,
+          position: "relative"
+        }}
+      >
+        {/* Active tab indicator */}
+        <motion.div
+          layoutId="activeTab"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: `${(activeTab / TABS.length) * 100}%`,
+            width: `${100 / TABS.length}%`,
+            height: "100%",
+            background: "transparent",
+            borderTop: "4px solid #ffffff"
+          }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        />
+
+        {TABS.map((tabName, idx) => (
+          <motion.button
+            key={tabName}
+            onClick={() => handleTabChange(idx)}
+            style={{
+              background: "transparent",
+              color: activeTab === idx ? "#ffffff" : "rgba(255,255,255,0.7)",
+              fontWeight: activeTab === idx ? 700 : 400,
+              fontSize: 16,
+              border: "none",
+              borderBottom: activeTab === idx ? "4px solid #ffffff" : "4px solid transparent",
+              padding: "16px 32px",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              position: "relative",
+              flex: 1,
+              whiteSpace: "nowrap"
+            }}
+            onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (activeTab !== idx) {
+                (e.target as HTMLButtonElement).style.color = "#ffffff";
+                (e.target as HTMLButtonElement).style.borderBottom = "4px solid rgba(255,255,255,0.3)";
+              }
+            }}
+            onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
+              if (activeTab !== idx) {
+                (e.target as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
+                (e.target as HTMLButtonElement).style.borderBottom = "4px solid transparent";
+              }
+            }}
+          >
+            {tabName}
+          </motion.button>
+        ))}
+      </motion.div>
     </div>
   );
 }

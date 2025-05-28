@@ -1070,6 +1070,10 @@ section {
   .vendor-desc {
     font-size: 0.7rem;
   }
+
+  .slider-items img {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 480px) {
@@ -1463,17 +1467,16 @@ section {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 30px; /* Adjust padding as needed */
-  background-color: #013238; /* Dark teal/green background */
-  border-radius: 50px; /* Apply rounded corners */
-  margin: 20px; /* Add some margin to lift it from the edges if needed */
-  /* Ensure it is positioned correctly within the .new-hero-section */
-  position: relative; /* Positioning for the parent container */
-  z-index: 1; /* Ensure it layers correctly over the background */
+  padding: 10px 30px;
+  background-color: #013238;
+  border-radius: 50px;
+  margin: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .navigation-bar .logo img {
-  height: 25px; /* Adjust logo height as needed */
+  height: 25px;
   border-radius: 20px;
 }
 
@@ -1485,26 +1488,26 @@ section {
 }
 
 .navigation-bar .nav-links li {
-  margin-left: 15px; /* Adjust spacing between links */
+  margin-left: 15px;
 }
 
 .navigation-bar .nav-links .nav-button {
   text-decoration: none;
-  color: white; /* White text color for links */
-  font-size: 18px; /* Adjust font size as needed */
-  padding: 10px 20px; /* Adjust padding */
-  border-radius: 25px; /* Rounded corners for buttons */
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 25px;
   transition: background-color 0.3s ease;
 }
 
 .navigation-bar .nav-links .nav-button:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Slight hover effect */
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .navigation-bar .nav-links .nav-button.active {
-  background-color: white; /* White background for active/Home link */
-  color: #013238; /* Dark text color for active/Home link */
-  font-weight: bold; /* Make active link bold */
+  background-color: white;
+  color: #013238;
+  font-weight: bold;
 }
 
 /* Upper Hero Content */
@@ -1554,8 +1557,8 @@ section {
 
 .micro-entrepreneurs{
   background: linear-gradient(to right, #00161C, #017C98);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 70px;
 }
 
@@ -1636,30 +1639,47 @@ section {
     flex-direction: column;
     gap: 15px;
   }
-  
+
   .navigation-bar .nav-links ul {
     flex-wrap: wrap;
     justify-content: center;
   }
-  
-  .upper-hero-content {
-    padding: 100px 15px 60px 15px;
+
+  .navigation-bar .nav-links li {
+    margin: 8px 10px;
   }
-  
+
+  .upper-hero-content {
+    padding: 80px 15px 40px 15px;
+  }
+
   .upper-hero-content .hero-title {
+    font-size: 2rem;
+  }
+
+  .micro-entrepreneurs {
     font-size: 2.5rem;
   }
-  
+
+  .upper-hero-content .subtitle {
+    font-size: 0.95rem;
+  }
+
   .lower-hero-content .image-overlay {
     padding: 30px 20px 20px 20px;
   }
-  
+
   .lower-hero-content .overlay-content h2 {
     font-size: 1.4rem;
   }
-  
+
   .lower-hero-content .overlay-content p {
     font-size: 0.9rem;
+  }
+
+  .slider-items img {
+    transform: scale(1.8);
+    margin: 20px;
   }
 }
 

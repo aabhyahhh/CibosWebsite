@@ -1,5 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
+import styled from "styled-components";
 
 import cool1 from "../assets/temp1.png";
 import cool2 from "../assets/temp2.png";
@@ -28,6 +29,24 @@ import pharmaIcon from "../assets/pharmaIcon.png"; // Placeholder path for facto
 import fireIcon from "../assets/fireIcon.png";
 import dc1Image from "../assets/Dc-1.png";
 // Ensure you have actual assets at these paths or update the paths
+
+// Define Interfaces
+interface ListItem {
+  text: string;
+  icon?: string;
+}
+
+interface TabContent {
+  title: string;
+  subtitle: string;
+  infoBar: string[];
+  leftTitle: string;
+  leftList: string[];
+  leftTitle2: string;
+  leftList2: ListItem[];
+  images: string[];
+  rightFeatures: ListItem[];
+}
 
 const TABS = [
   "Heated delivery box",
@@ -313,9 +332,241 @@ function SimpleCarousel({ images }: { images: string[] }) {
   );
 }
 
+// Define Interfaces for styled component props
+interface LeftColumnProps {
+  $expanded: boolean;
+}
+
+interface TabButtonProps {
+  $active: boolean;
+}
+
+// Styled Components for Responsive Design
+const Container = styled.div`
+  background: white;
+  min-height: 100vh;
+  min-width: 100vw;
+  overflow: hidden;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+`;
+
+const Header = styled(motion.div)`
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 20px;
+
+  @media (max-width: 768px) {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+`;
+
+const Title = styled(motion.h1)`
+  color: #117b8b;
+  font-weight: 900;
+  font-size: 48px;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 4px 16px rgba(17, 123, 139, 0.2);
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    letter-spacing: 1px;
+  }
+`;
+
+const Subtitle = styled(motion.div)`
+  color: #117b8b;
+  font-weight: 400;
+  font-size: 24px;
+  font-style: italic;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-top: 4px;
+  }
+`;
+
+const InfoBar = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  padding: 0 40px;
+  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    padding: 0;
+    margin-bottom: 20px;
+  }
+`;
+
+const InfoBarContent = styled(motion.div)`
+  background: linear-gradient(90deg, #0a3a43 0%, #117b8b 100%);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 24px 60px;
+  font-weight: 600;
+  font-size: 16px;
+  max-width: 1200px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(17, 123, 139, 0.25);
+  line-height: 1.4;
+
+  @media (max-width: 768px) {
+    padding: 12px 24px;
+    font-size: 12px;
+    border-radius: 16px;
+  }
+`;
+
+const ContentGrid = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+  height: 100%;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+`;
+
+const MobileFeatures = styled.div`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+`;
+
+const FeatureItem = styled.div`
+  text-align: center;
+  width: 80px;
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
+
+  p {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+`;
+
+const DesktopFeatures = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const LeftColumn = styled(motion.div)<LeftColumnProps>`
+  @media (max-width: 768px) {
+    display: ${props => props.$expanded ? 'block' : 'none'};
+  }
+`;
+
+const ReadMoreButton = styled.button`
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+    margin: 10px auto;
+    padding: 8px 16px;
+    background: #117b8b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    margin-top: 35px;
+
+    &:hover {
+      background: #0a3a43;
+    }
+  }
+`;
+
+const NavTabs = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background: #117b8b;
+  min-height: 60px;
+  position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    background: transparent;
+    gap: 8px;
+    margin-top: 20px;
+  }
+`;
+
+const TabButton = styled(motion.button)<TabButtonProps>`
+  background: transparent;
+  color: ${props => props.$active ? "#ffffff" : "rgba(255,255,255,0.7)"};
+  font-weight: ${props => props.$active ? 700 : 400};
+  font-size: 16px;
+  border: none;
+  border-bottom: 4px solid ${props => props.$active ? "#ffffff" : "transparent"};
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  flex: 1;
+  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    background: ${props => props.$active ? "#117b8b" : "#e0e0e0"};
+    color: ${props => props.$active ? "white" : "#444"};
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  &:hover {
+    @media (min-width: 769px) {
+      color: #ffffff;
+      border-bottom: 4px solid rgba(255,255,255,0.3);
+    }
+  }
+`;
+
+// Add useIsMobile hook
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateSize = () => setIsMobile(window.innerWidth < 768);
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  return isMobile;
+};
+
 export default function CoolingBoxShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [direction, setDirection] = useState(0);  
+  const [direction, setDirection] = useState(0);
+  const [readMore, setReadMore] = useState(false); // Add readMore state
+  const isMobile = useIsMobile(); // Use the hook
+
   // Add refs for scroll animations
   const headerRef = useRef(null);
   const infoBarRef = useRef(null);
@@ -405,111 +656,30 @@ export default function CoolingBoxShowcase() {
   };
 
   return (
-    <div style={{ 
-      background: "white", 
-      minHeight: "100vh",
-      minWidth: "100vw",
-      overflow: "hidden"
-    }}>
-      {/* Header with scroll animation */}
-      <motion.div 
-        ref={headerRef}
-        initial="hidden"
-        animate={isHeaderInView ? "visible" : "hidden"}
-        variants={scrollFadeUp}
-        style={{ 
-          textAlign: "center", 
-          paddingTop: 40,
-          paddingBottom: 20
-        }}
-      >
-        <motion.h1 
-          variants={scrollFadeUp}
-          style={{
-            color: "#117b8b",
-            fontWeight: 900,
-            fontSize: 48,
-            letterSpacing: 2,
-            margin: 0,
-            lineHeight: 1.1,
-            textShadow: "0 4px 16px rgba(17, 123, 139, 0.2)"
-          }}
-        >
-          {tab.title}
-        </motion.h1>
-        <motion.div 
-          variants={scrollFadeUp}
-          style={{
-            color: "#117b8b",
-            fontWeight: 400,
-            fontSize: 24,
-            fontStyle: "italic",
-            marginTop: 8,
-            letterSpacing: 0.5,
-            opacity: 0.9
-          }}
-        >
-          {tab.subtitle}
-        </motion.div>
-      </motion.div>
+    <Container>
+      <Header ref={headerRef} initial="hidden" animate={isHeaderInView ? "visible" : "hidden"} variants={scrollFadeUp}>
+        <Title variants={scrollFadeUp}>{tab.title}</Title>
+        <Subtitle variants={scrollFadeUp}>{tab.subtitle}</Subtitle>
+      </Header>
 
-      {/* Info Bar with scroll animation */}
-      <motion.div 
-        ref={infoBarRef}
-        initial="hidden"
-        animate={isInfoBarInView ? "visible" : "hidden"}
-        variants={scrollFadeUp}
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "0 40px",
-          marginBottom: 40
-        }}
-      >
-        <motion.div 
-          variants={scrollFadeUp}
-          style={{
-            background: "linear-gradient(90deg, #0a3a43 0%, #117b8b 100%)",
-            color: "#ffffff",
-            borderRadius: 20,
-            padding: "24px 60px",
-            fontWeight: 600,
-            fontSize: 16,
-            maxWidth: 1200,
-            textAlign: "center",
-            boxShadow: "0 8px 32px rgba(17, 123, 139, 0.25)",
-            lineHeight: 1.4
-          }}
-        >
-          <motion.div variants={scrollFadeUp} style={{ marginBottom: 8 }}>{tab.infoBar[0]}</motion.div>
-          <motion.div variants={scrollFadeUp}>{tab.infoBar[1]}</motion.div>
-        </motion.div>
-      </motion.div>
+      <InfoBar ref={infoBarRef} initial="hidden" animate={isInfoBarInView ? "visible" : "hidden"} variants={scrollFadeUp}>
+        <InfoBarContent variants={scrollFadeUp}>
+          {tab.infoBar.map((text, i) => (
+            <motion.div key={i} variants={scrollFadeUp}>{text}</motion.div>
+          ))}
+        </InfoBarContent>
+      </InfoBar>
 
-      {/* Main Content Container with scroll animation */}
-      <motion.div 
-        ref={contentRef}
-        initial="hidden"
-        animate={isContentInView ? "visible" : "hidden"}
-        variants={scrollFadeIn}
-        style={{
-          maxWidth: 1400,
-          margin: "0 auto",
-          padding: "0 40px",
-          marginBottom: 40
-        }}
-      >
-        <motion.div 
-          variants={scrollFadeUp}
-          style={{
-            background: "#ffffff",
-            borderRadius: 24,
-            boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
-            overflow: "hidden"
-          }}
-        >
-          {/* Animated Content Area */}
-          <div style={{ padding: 60, minHeight: 500 }}>
+      <motion.div ref={contentRef} initial="hidden" animate={isContentInView ? "visible" : "hidden"} variants={scrollFadeIn}>
+        <motion.div variants={scrollFadeUp} style={{
+          background: "#ffffff",
+          borderRadius: 24,
+          boxShadow: "0 12px 40px rgba(0,0,0,0.15)",
+          overflow: "hidden",
+          maxWidth: isMobile ? "unset" : "1200px",
+          margin: isMobile ? "0" : "0 auto"
+        }}>
+          <div style={{ padding: isMobile ? 20 : 60, minHeight: isMobile ? 300 : 500 }}>
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={`content-${activeTab}`}
@@ -523,245 +693,157 @@ export default function CoolingBoxShowcase() {
                   opacity: { duration: 0.5 },
                   scale: { duration: 0.5 }
                 }}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 2fr 1fr",
-                  gap: 60,
-                  alignItems: "start",
-                  height: "100%"
-                }}
               >
-                {/* Left Column */}
-                <motion.div
-                  variants={staggerContainer}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <motion.div 
-                    variants={itemFadeIn}
-                    style={{ 
-                      color: "#117b8b", 
-                      fontWeight: 700, 
-                      fontSize: 18, 
-                      marginBottom: 16,
-                      borderBottom: "3px solid #e0f7fa",
-                      paddingBottom: 8
-                    }}
-                  >
-                    {tab.leftTitle}
-                  </motion.div>
-                  <motion.ul 
-                    variants={staggerContainer}
-                    style={{ 
-                      color: "#555", 
-                      fontWeight: 400, 
-                      fontSize: 15, 
-                      marginBottom: 32,
-                      paddingLeft: 20,
-                      lineHeight: 1.7
-                    }}
-                  >
-                    {tab.leftList.map((item, i) => (
-                      <motion.li 
-                        key={i} 
-                        variants={itemFadeIn}
-                        style={{ 
-                          marginBottom: 10,
-                          listStyleType: "disc"
-                        }}
-                      >
-                        {item}
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-                  
-                  <motion.div 
-                    variants={itemFadeIn}
-                    style={{ 
-                      color: "#117b8b", 
-                      fontWeight: 700, 
-                      fontSize: 18, 
-                      marginBottom: 16,
-                      borderBottom: "3px solid #e0f7fa",
-                      paddingBottom: 8
-                    }}
-                  >
-                    {tab.leftTitle2}
-                  </motion.div>
-                  <motion.ul 
-                    variants={staggerContainer}
-                    style={{
-                      color: "#555",
-                      fontWeight: 400,
-                      fontSize: 15,
-                      lineHeight: 1.6,
-                      listStyleType: "none",
-                      padding: 0
-                    }}
-                  >
-                    {tab.leftList2.map((item, i) => (
-                      <motion.li 
-                        key={i} 
-                        variants={itemFadeIn}
-                        style={{
-                          marginBottom: 12,
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        {item.icon && (
-                          <motion.img
-                            variants={itemFadeIn}
-                            src={item.icon}
-                            alt={`${item.text} icon`}
-                            style={{
-                              width: 18,
-                              height: 18,
-                              marginRight: 10,
-                              objectFit: "contain",
-                              filter: "none"
-                            }}
-                          />
-                        )}
-                        {item.text}
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-                </motion.div>
-
-                {/* Center Carousel */}
-                <motion.div 
-                  variants={itemFadeIn}
-                  initial="hidden"
-                  animate="visible"
-                  transition={{ delay: 0.2 }}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "relative"
-                  }}
-                >
-                  <SimpleCarousel images={tab.images || []} />
-                </motion.div>
-
-                {/* Right Features */}
-                <motion.div 
-                  variants={staggerContainer}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 32,
-                    alignItems: "center"
-                  }}>
+                <ContentGrid>
+                  {/* Mobile Features */}
+                  <MobileFeatures>
                     {tab.rightFeatures.map((f, i) => (
-                      <motion.div 
-                        key={i} 
-                        variants={itemFadeIn}
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          justifyContent: "center"
-                        }}
-                      >
-                        <motion.img 
-                          variants={itemFadeIn}
-                          src={f.icon} 
-                          alt={f.text} 
-                          style={{ 
-                            width: 48, 
-                            height: 48, 
-                            objectFit: "contain", 
-                            marginBottom: 12,
-                            filter: "none"
-                          }} 
-                        />
-                        <motion.span 
+                      <FeatureItem key={i}>
+                        <img src={f.icon} alt={f.text} />
+                        <p>{f.text}</p>
+                      </FeatureItem>
+                    ))}
+                  </MobileFeatures>
+
+                  {/* Left Column */}
+                  <LeftColumn
+                    $expanded={readMore || !isMobile}
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    <motion.div
+                      variants={itemFadeIn}
+                      style={{
+                        color: "#117b8b",
+                        fontWeight: 700,
+                        fontSize: 18,
+                        marginBottom: 16,
+                        borderBottom: "3px solid #e0f7fa",
+                        paddingBottom: 8
+                      }}
+                    >
+                      {tab.leftTitle}
+                    </motion.div>
+                    <motion.ul
+                      variants={staggerContainer}
+                      style={{
+                        color: "#555",
+                        fontWeight: 400,
+                        fontSize: 15,
+                        marginBottom: 32,
+                        paddingLeft: 20,
+                        lineHeight: 1.7
+                      }}
+                    >
+                      {tab.leftList.map((item, i) => (
+                        <motion.li
+                          key={i}
                           variants={itemFadeIn}
                           style={{
-                            color: "#0a3a43",
-                            fontWeight: 500,
-                            fontSize: 12,
-                            textAlign: "center",
-                            lineHeight: 1.3,
-                            width: "120px"
+                            marginBottom: 10,
+                            listStyleType: "disc"
                           }}
                         >
-                          {f.text}
-                        </motion.span>
+                          {item}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+
+                    <motion.div
+                      variants={itemFadeIn}
+                      style={{
+                        color: "#117b8b",
+                        fontWeight: 700,
+                        fontSize: 18,
+                        marginBottom: 16,
+                        borderBottom: "3px solid #e0f7fa",
+                        paddingBottom: 8
+                      }}
+                    >
+                      {tab.leftTitle2}
+                    </motion.div>
+                    <motion.ul
+                      variants={staggerContainer}
+                      style={{
+                        color: "#555",
+                        fontWeight: 400,
+                        fontSize: 15,
+                        lineHeight: 1.6,
+                        listStyleType: "none",
+                        padding: 0
+                      }}
+                    >
+                      {tab.leftList2.map((item, i) => (
+                        <motion.li
+                          key={i}
+                          variants={itemFadeIn}
+                          style={{
+                            marginBottom: 12,
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          {item.icon && (
+                            <motion.img
+                              variants={itemFadeIn}
+                              src={item.icon}
+                              alt={`${item.text} icon`}
+                              style={{
+                                width: 18,
+                                height: 18,
+                                marginRight: 10,
+                                objectFit: "contain",
+                                filter: "none"
+                              }}
+                            />
+                          )}
+                          {item.text}
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+                  </LeftColumn>
+
+                  {/* Center Carousel */}
+                  <motion.div variants={itemFadeIn} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <SimpleCarousel images={tab.images} />
+                  </motion.div>
+
+                  {/* Desktop Features */}
+                  <DesktopFeatures>
+                    {tab.rightFeatures.map((f, i) => (
+                      <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
+                        <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
+                        <p>{f.text}</p>
                       </motion.div>
                     ))}
-                  </div>
-                </motion.div>
+                  </DesktopFeatures>
+                </ContentGrid>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Enhanced Navigation Bar */}
-          <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "stretch",
-            background: "#117b8b",
-            minHeight: 60,
-            position: "relative"
-          }}>
-            {/* Active tab indicator */}
-            <motion.div
-              layoutId="activeTab"
-              style={{
-                position: "absolute",
-                top: 0,
-                left: `${(activeTab / TABS.length) * 100}%`,
-                width: `${100 / TABS.length}%`,
-                height: "100%",
-                background: "transparent",
-                borderTop: "4px solid #ffffff"
-              }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            />
+          {isMobile && (
+            <ReadMoreButton onClick={() => setReadMore(prev => !prev)}>
+              {readMore ? 'Show Less' : 'Read More'}
+            </ReadMoreButton>
+          )}
 
+          <NavTabs>
             {TABS.map((tabName, idx) => (
-              <motion.button
+              <TabButton
                 key={tabName}
+                $active={activeTab === idx}
                 onClick={() => handleTabChange(idx)}
-                style={{
-                  background: "transparent",
-                  color: activeTab === idx ? "#ffffff" : "rgba(255,255,255,0.7)",
-                  fontWeight: activeTab === idx ? 700 : 400,
-                  fontSize: 16,
-                  border: "none",
-                  borderBottom: activeTab === idx ? "4px solid #ffffff" : "4px solid transparent",
-                  padding: "16px 32px",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                  position: "relative",
-                  flex: 1,
-                  whiteSpace: "nowrap"
-                }}
-                onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  if (activeTab !== idx) {
-                    (e.target as HTMLButtonElement).style.color = "#ffffff";
-                    (e.target as HTMLButtonElement).style.borderBottom = "4px solid rgba(255,255,255,0.3)";
-                  }
-                }}
-                onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
-                  if (activeTab !== idx) {
-                    (e.target as HTMLButtonElement).style.color = "rgba(255,255,255,0.7)";
-                    (e.target as HTMLButtonElement).style.borderBottom = "4px solid transparent";
-                  }
-                }}
+                whileHover={!isMobile ? { scale: 1.02 } : {}}
+                whileTap={{ scale: 0.98 }}
               >
                 {tabName}
-              </motion.button>
+              </TabButton>
             ))}
-          </div>
+          </NavTabs>
         </motion.div>
       </motion.div>
-    </div>
+    </Container>
   );
 }

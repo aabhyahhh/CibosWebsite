@@ -28,10 +28,11 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
         },
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name.endsWith('.css')) {
+          const name = assetInfo.name || '';
+          if (name.endsWith('.css')) {
             return 'assets/css/[name]-[hash][extname]';
           }
-          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(assetInfo.name)) {
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(name)) {
             return 'assets/images/[name]-[hash][extname]';
           }
           return 'assets/[name]-[hash][extname]';

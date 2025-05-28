@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     viteStaticCopy({
@@ -16,4 +16,8 @@ export default defineConfig({
       ]
     }),
     react()],
+  build: {
+    outDir: 'dist',
+    sourcemap: true
+  }
 })

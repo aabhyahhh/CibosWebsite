@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { AnimatePresence, motion, useScroll, useTransform, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 
 import ir1 from "../assets/c-ir1.png";
 import ir2 from "../assets/c-ir2.png";
@@ -285,19 +285,16 @@ function SimpleCarousel({ images }: { images: string[] }) {
 export default function CleanCookingShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const [direction, setDirection] = useState(0);
-  const { scrollYProgress } = useScroll();
   
   // Add refs for scroll animations
   const headerRef = useRef(null);
   const infoBarRef = useRef(null);
   const contentRef = useRef(null);
-  const navRef = useRef(null);
 
   // Add useInView hooks for scroll-triggered animations
   const isHeaderInView = useInView(headerRef, { once: true, amount: 0.3 });
   const isInfoBarInView = useInView(infoBarRef, { once: true, amount: 0.3 });
   const isContentInView = useInView(contentRef, { once: true, amount: 0.1 });
-  const isNavInView = useInView(navRef, { once: true, amount: 0.3 });
 
   const handleTabChange = (newTabIndex: number) => {
     if (newTabIndex === activeTab) return;
@@ -329,15 +326,6 @@ export default function CleanCookingShowcase() {
     })
   };
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
-    }
-  };
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -357,18 +345,6 @@ export default function CleanCookingShowcase() {
       scale: 1,
       transition: { 
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
-  };
-
-  const headerVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
         ease: [0.6, -0.05, 0.01, 0.99]
       }
     }

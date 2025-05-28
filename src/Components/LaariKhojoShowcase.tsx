@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { AnimatePresence, motion, useScroll, useTransform, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 
 // Placeholder imports for Khojo images/icons - replace with actual paths
 import khojoMain from '../assets/khojoMain.png'; // Placeholder for the central app screenshot
@@ -285,22 +285,20 @@ function SimpleCarousel({ images }: { images: string[] }) {
   );
 }
 
-export default function LaariShowcase() {
+export default function LaariKhojoShowcase() {
   const [activeTab, setActiveTab] = useState(0);
   const [direction, setDirection] = useState(0);
-  const { scrollYProgress } = useScroll();
+  const navRef = useRef(null);
   
   // Add refs for scroll animations
   const headerRef = useRef(null);
   const infoBarRef = useRef(null);
   const contentRef = useRef(null);
-  const navRef = useRef(null);
 
   // Add useInView hooks for scroll-triggered animations
   const isHeaderInView = useInView(headerRef, { once: true, amount: 0.3 });
   const isInfoBarInView = useInView(infoBarRef, { once: true, amount: 0.3 });
   const isContentInView = useInView(contentRef, { once: true, amount: 0.1 });
-  const isNavInView = useInView(navRef, { once: true, amount: 0.3 });
 
   const handleTabChange = (newTabIndex: number) => {
     if (newTabIndex === activeTab) return;
@@ -332,15 +330,6 @@ export default function LaariShowcase() {
     })
   };
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }
-    }
-  };
-
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -360,18 +349,6 @@ export default function LaariShowcase() {
       scale: 1,
       transition: { 
         duration: 0.5,
-        ease: [0.6, -0.05, 0.01, 0.99]
-      }
-    }
-  };
-
-  const headerVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
         ease: [0.6, -0.05, 0.01, 0.99]
       }
     }
@@ -764,7 +741,7 @@ export default function LaariShowcase() {
       <motion.div 
         ref={navRef}
         initial="hidden"
-        animate={isNavInView ? "visible" : "hidden"}
+        animate={isContentInView ? "visible" : "hidden"}
         variants={scrollFadeUp}
         style={{
           display: "flex",

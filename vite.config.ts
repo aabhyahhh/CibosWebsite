@@ -11,13 +11,41 @@ export default defineConfig({
           src: '.htaccess',
           dest: '.' // places it directly in the dist folder
         },
-
-        { src: 'src/assets', dest: '' }
+        { 
+          src: 'src/assets',
+          dest: 'assets'
+        }
       ]
     }),
-    react()],
+    react()
+  ],
   build: {
     outDir: 'dist',
-    sourcemap: true
-  }
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name.endsWith('.css')) {
+            return 'assets/css/[name]-[hash][extname]';
+          }
+          if (/\.(png|jpe?g|gif|svg|webp|avif)$/.test(assetInfo.name)) {
+            return 'assets/images/[name]-[hash][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+      },
+    },
+    assetsInlineLimit: 4096, // 4kb
+    chunkSizeWarningLimit: 1000,
+  },
+  resolve: {
+    alias: {
+      '@': '/src',
+    },
+  },
 })

@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 
 import banner2 from "./assets/Banner2.png";
@@ -38,10 +39,23 @@ import a2 from "./assets/a2.jpg";
 import a3 from "./assets/a3.jpg";
 import a4 from "./assets/a4.jpg";
 import a5 from "./assets/a5.jpg";
+import l1 from "./assets/l1.png";
+import solarRight from "./assets/solar-right.png";
+import batteryLeft from "./assets/battery-left.png";
+import digitalPlatform from "./assets/digitalPlatform.png";
 import LaariShowcase from "./Components/LaariShowcase";
 import CleanCookingShowcase from "./Components/CleanCookingShowcase";
 import CoolingBoxShowcase from "./Components/CoolingBoxShowcase";
 import LaariKhojoShowcase from "./Components/LaariKhojoShowcase";
+
+if (typeof window !== 'undefined') {
+  (window as any).__BACKGROUND_IMAGES__ = {
+    l1,
+    solarRight,
+    batteryLeft,
+    digitalPlatform
+  };
+}
 
 function App() {
   return (

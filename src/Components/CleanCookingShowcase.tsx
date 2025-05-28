@@ -8,6 +8,15 @@ import ir3 from "../assets/c-ir3.png";
 import a1 from "../assets/c-a1.png";
 import a2 from "../assets/c-a2.png";
 
+import energyIcon from "../assets/energyIcon.png";
+import heatIcon from "../assets/heatingIcon.png";
+import safetyIcon from "../assets/safetyIcon.png";
+import sleekIcon from "../assets/sleekIcon.png";
+
+import operationIcon from "../assets/operationIcon.png";
+import batteryIcon from "../assets/batteryIcon.png";
+import smartIcon from "../assets/smartIcon.png";
+
 interface ListItem {
   text: string;
   icon?: string;
@@ -53,10 +62,10 @@ const tabContent: TabContent[] = [
     ],
     images: [ir1, ir2, ir3], // Use imported images for carousel
     rightFeatures: [
-      { icon: "../assets/energyIcon.png", text: "Energy Efficient" }, // Placeholder icon
-      { icon: "../assets/heatingIcon.png", text: "Rapid Heating" }, // Placeholder icon
-      { icon: "../assets/safetyIcon.png", text: "Safety First" }, // Placeholder icon
-      { icon: "../assets/sleekIcon.png", text: "Sleek Design" }, // Placeholder icon
+      { icon: energyIcon, text: "Energy Efficient" }, // Placeholder icon
+      { icon: heatIcon, text: "Rapid Heating" }, // Placeholder icon
+      { icon: safetyIcon, text: "Safety First" }, // Placeholder icon
+      { icon: sleekIcon, text: "Sleek Design" }, // Placeholder icon
     ],
   },
   // Agnit Solar powered cooktop
@@ -80,10 +89,10 @@ const tabContent: TabContent[] = [
     ],
     images: [a1, a2], // Placeholder image
     rightFeatures: [
-      { icon: "../assets/operationIcon.png", text: "Truly Off-Grid Operation" }, // Placeholder icon
-      { icon: "../assets/safetyIcon.png", text: "Safe & Clean Cooking" }, // Placeholder icon
-      { icon: "../assets/batteryIcon.png", text: "Battery-Compatible for Night Use" }, // Placeholder icon
-      { icon: "../assets/smartIcon.png", text: "Smart Usage Monitoring (Optional)" }, // Placeholder icon
+      { icon: operationIcon, text: "Truly Off-Grid Operation" }, // Placeholder icon
+      { icon: safetyIcon, text: "Safe & Clean Cooking" }, // Placeholder icon
+      { icon: batteryIcon, text: "Battery-Compatible for Night Use" }, // Placeholder icon
+      { icon: smartIcon, text: "Smart Usage Monitoring (Optional)" }, // Placeholder icon
     ],
   },
 ];

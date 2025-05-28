@@ -23,6 +23,10 @@ import alertIcon from "../assets/alertIcon.png"; // Placeholder path
 // Add imports for the new icons based on the images
 import agriculturalIcon from "../assets/agriculturalIcon.png"; // Placeholder path for wheat icon
 import pharmaIcon from "../assets/pharmaIcon.png"; // Placeholder path for factory icon
+
+// Add import for the fire icon and DC-1 image
+import fireIcon from "../assets/fireIcon.png";
+import dc1Image from "../assets/Dc-1.png";
 // Ensure you have actual assets at these paths or update the paths
 
 const TABS = [
@@ -53,10 +57,10 @@ const tabContent = [
     ],
     images: [cool1, cool2, cool3, cool4, cool5], // Use imported heated images
     rightFeatures: [
-      { icon: "../assets/fireIcon.png", text: "Proprietary heating technology" }, // Placeholder icon for heating
-      { icon: "../assets/portableIcon.png", text: "Portable" }, // Placeholder icon for portable
-      { icon: "../assets/safety1Icon.png", text: "Improved safety measures" }, // Placeholder icon for safety
-      { icon: "../assets/costIcon.png", text: "Cost - effective" }, // Placeholder icon for cost effective
+      { icon: fireIcon, text: "Proprietary heating technology" }, // Use imported icon
+      { icon: portableIcon, text: "Portable" }, // Use imported icon
+      { icon: safety1Icon, text: "Improved safety measures" }, // Use imported icon
+      { icon: costIcon, text: "Cost - effective" }, // Use imported icon
     ],
   },
   // Placeholder for Cold delivery box content
@@ -81,10 +85,10 @@ const tabContent = [
     ],
     images: [heat1, heat2], // Use imported cooling images
     rightFeatures: [
-      { icon: "../assets/coolingIcon.png", text: "Proprietary Cooling Technology" }, // Using imported icon
-      { icon: "../assets/portableIcon.png", text: "Portable" }, // Using imported icon
-      { icon: "../assets/safety1Icon.png", text: "Improved Safety Measures" }, // Using imported icon
-      { icon: "../assets/costIcon.png", text: "Cost - Effective" }, // Using imported icon
+      { icon: coolingIcon, text: "Proprietary Cooling Technology" }, // Using imported icon
+      { icon: portableIcon, text: "Portable" }, // Using imported icon
+      { icon: safety1Icon, text: "Improved Safety Measures" }, // Using imported icon
+      { icon: costIcon, text: "Cost - Effective" }, // Using imported icon
     ],
   },
   {
@@ -105,7 +109,7 @@ const tabContent = [
       { text: "Pharmaceuticals and Vaccinations", icon: pharmaIcon }, // Example: using the pharma icon
       { text: "Defense, Emergency and Disaster Relief", icon: alertIcon }, // Example: using the defense icon
     ],
-    images: ["../assets/Dc-1.png"],
+    images: [dc1Image],
     rightFeatures: [
       { icon: coolingIcon, text: "Proprietary Cooling Technology" },
       { icon: portableIcon, text: "Portable" },
@@ -311,9 +315,7 @@ function SimpleCarousel({ images }: { images: string[] }) {
 
 export default function CoolingBoxShowcase() {
   const [activeTab, setActiveTab] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const navRef = useRef(null);
-  
+  const [direction, setDirection] = useState(0);  
   // Add refs for scroll animations
   const headerRef = useRef(null);
   const infoBarRef = useRef(null);

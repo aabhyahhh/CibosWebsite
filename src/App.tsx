@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 
 import banner2 from "./assets/Banner2.png";
@@ -13,11 +14,7 @@ import client4 from "./assets/client4.jpg";
 import client5 from "./assets/client5.png";
 import client6 from "./assets/client6.jpg";
 import client7 from "./assets/client7.jpg";
-import digitalPlatform from "./assets/digitalPlatform-left.png";
 import logo from "./assets/Cibos-logo.png";
-import LaariProductSlider from "./Components/LaariProductSlider";
-import CleanCookingSlider from "./Components/CleanCookingSlider";
-import TemperatureControlledSlider from "./Components/TemperatureControlledSlider";
 import phoneIcon from "./assets/phone-icon.png";
 import locationIcon from "./assets/locationIcon.png";
 import mailIcon from "./assets/mailIcon.png";
@@ -42,11 +39,23 @@ import a2 from "./assets/a2.jpg";
 import a3 from "./assets/a3.jpg";
 import a4 from "./assets/a4.jpg";
 import a5 from "./assets/a5.jpg";
+import l1 from "./assets/l1.png";
+import solarRight from "./assets/solar-right.png";
+import batteryLeft from "./assets/battery-left.png";
+import digitalPlatform from "./assets/digitalPlatform.png";
 import LaariShowcase from "./Components/LaariShowcase";
 import CleanCookingShowcase from "./Components/CleanCookingShowcase";
 import CoolingBoxShowcase from "./Components/CoolingBoxShowcase";
 import LaariKhojoShowcase from "./Components/LaariKhojoShowcase";
-import DcShowcase from "./Components/DcShowcase";
+
+if (typeof window !== 'undefined') {
+  (window as any).__BACKGROUND_IMAGES__ = {
+    l1,
+    solarRight,
+    batteryLeft,
+    digitalPlatform
+  };
+}
 
 function App() {
   return (
@@ -193,10 +202,25 @@ function App() {
       </div>
 
       {/* Section 6 - New Vendor & Product Section */}
-      <LaariShowcase />
-      <CleanCookingShowcase />
-      <CoolingBoxShowcase />
-      <LaariKhojoShowcase />
+      {/* Laari Showcase Section */}
+      <section id="laari-section">
+        <LaariShowcase />
+      </section>
+
+      {/* Clean Cooking Showcase Section */}
+      <section id="clean-cooking-section">
+        <CleanCookingShowcase />
+      </section>
+
+      {/* Temperature Controlled Delivery Showcase Section */}
+      <section id="temperature-controlled-section">
+        <CoolingBoxShowcase />
+      </section>
+
+      {/* Digital Platform Showcase Section */}
+      <section id="digital-platform-section">
+        <LaariKhojoShowcase />
+      </section>
 
       {/* SUPPORTED BY */}
       <section className="customers-partners-section">

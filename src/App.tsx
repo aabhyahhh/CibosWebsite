@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import "./App.css";
 
 import banner2 from "./assets/Banner2.png";
@@ -7,14 +7,15 @@ import cookingIcon from "./assets/cookingIcon.png";
 import deliveryIcon from "./assets/deliveryIcon.png";
 import digitalIcon from "./assets/digitalIcon.png";
 import banner3 from "./assets/banner3.png";
-import client1 from "./assets/client1.jpg";
+import client1 from "./assets/client1.png";
 import client2 from "./assets/client2.png";
 import client3 from "./assets/client3.png";
 import client4 from "./assets/client4.jpg";
 import client5 from "./assets/client5.png";
 import client6 from "./assets/client6.jpg";
 import client7 from "./assets/client7.jpg";
-import logo from "./assets/Cibos-logo.png";
+import logo from "./assets/cibosLogo.png";
+import logo1 from "./assets/logo1.png";
 import phoneIcon from "./assets/phone-icon.png";
 import locationIcon from "./assets/locationIcon.png";
 import mailIcon from "./assets/mailIcon.png";
@@ -48,283 +49,370 @@ import CleanCookingShowcase from "./Components/CleanCookingShowcase";
 import CoolingBoxShowcase from "./Components/CoolingBoxShowcase";
 import LaariKhojoShowcase from "./Components/LaariKhojoShowcase";
 
+// Import new images for the hero section
+import heroBackground from "./assets/hero-background.png"; // Assuming this is the background image for the upper hero
+import streetVendorImage from "./assets/street-vendor.png"; // Assuming this is the image for the lower hero
+
 if (typeof window !== 'undefined') {
   (window as any).__BACKGROUND_IMAGES__ = {
     l1,
     solarRight,
     batteryLeft,
-    digitalPlatform
+    digitalPlatform,
+    heroBackground, // Add new hero background image
+    streetVendorImage // Add new street vendor image
   };
 }
 
 function App() {
+  const overlayContentRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            // Optionally, unobserve after animation
+            // observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    if (overlayContentRef.current) {
+      observer.observe(overlayContentRef.current);
+    }
+
+    return () => {
+      if (overlayContentRef.current) {
+        observer.unobserve(overlayContentRef.current);
+      }
+    };
+  }, []); // Empty dependency array means this effect runs once on mount
+
   return (
     <>
-      {/* Section 1 */}
-      <div className="banner-top">
-        <img src={logo} alt="Banner Top" className="banner-top-img" />
-      </div>
-      {/* Section 2 */}
-      <div className="wrapper">
-        <div className="image-container">
-          <img src={banner2} className="banner2" alt="Banner" />
-          <div className="image-content">
-            <div className="content-inner">
-              <h1>the streets never sleep...</h1>
-              <p>
-                we see the micro entrepreneurs—the ones who grind every day,
-                making just enough to get by, yet always daring to dream bigger.
-                They don't complain. They don't stop. And we ask: What if they
-                didn't have to choose between progress and affordability?
-                Between sustainability and convenience? What if they could have
-                both?
-              </p>
-            </div>
+      <div className="new-hero-section" id="home">
+        {/* Navigation Bar */}
+        <header className="navigation-bar">
+          <div className="logo">
+            <img src={logo} alt="Cibos Logo" />
+          </div>
+          <nav className="nav-links">
+            <ul>
+              <li><a href="#home" className="nav-button active">Home</a></li>
+              <li><a href="#products" className="nav-button">Products</a></li>
+              <li><a href="#contact-us" className="nav-button">Contact Us</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        {/* Upper Hero Content */}
+        <div className="upper-hero-content">
+          <div className="hero-text-content">
+            <p className="impact-text">Built on Deep-Tech Innovation</p>
+            <h1 className="hero-title">
+              <span className="clean-tech">Plug & Play Hardware,<br/>Clean Energy, and Digital Stack for</span><br />
+              <span className="micro-entrepreneurs">Street Vendors</span>
+            </h1>
+            <p className="subtitle">Empowering 38 million Indian vendors to<br />sell-more, save on energy, keep food fresh longer and gain easy permits & credit</p>
           </div>
         </div>
-      </div>
 
-      {/* Section 3 */}
-      <div className="product-categories">
-        <div className="categories-container">
-          <button
-            className="category-item"
-            onClick={() =>
-              (
-                document.getElementById("laari-section") as HTMLElement
-              ).scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            <img src={laariIcon} alt="LAARI" className="category-icon" />
-            <h3 className="category-title">
-              LAARI<sup>TM</sup>
-            </h3>
-            <p className="category-desc">Food Carts, Kiosks & Pods</p>
-            <p className="category-desc">Portable Retail Shops</p>
-          </button>
-
-          <button
-            className="category-item"
-            onClick={() =>
-              (
-                document.getElementById("clean-cooking-section") as HTMLElement
-              ).scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            <img
-              src={cookingIcon}
-              alt="Clean Cooking"
-              className="category-icon"
-            />
-            <h3 className="category-title">Clean Cooking</h3>
-            <p className="category-desc">Solar-Powered Cookstoves</p>
-            <p className="category-desc">Infrared Cookstoves</p>
-          </button>
-
-          <button
-            className="category-item"
-            onClick={() =>
-              (
-                document.getElementById(
-                  "digital-platform-section"
-                ) as HTMLElement
-              ).scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            <img
-              src={digitalIcon}
-              alt="Digital Platform"
-              className="category-icon"
-            />
-            <h3 className="category-title">Digital Platform</h3>
-            <p className="category-desc">Vendor Discovery Platform</p>
-            <p className="category-desc">WhatsApp-Based Vendor Support</p>
-          </button>
-
-          <button
-            className="category-item"
-            onClick={() =>
-              (
-                document.getElementById(
-                  "temperature-controlled-section"
-                ) as HTMLElement
-              ).scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            <img
-              src={deliveryIcon}
-              alt="Temperature Controlled Delivery"
-              className="category-icon"
-            />
-            <h3 className="category-title">Temperature Controlled Delivery</h3>
-            <p className="category-desc">Portable Heating Boxes</p>
-            <p className="category-desc">Portable Cooling Boxes</p>
-          </button>
-        </div>
-      </div>
-
-      {/* Section 4 */}
-      <section>
-        <div className="slider-title">
-          <h1>Our Clients</h1>
-          <div className="slider">
-            <div className="slider-items">
-              <img src={client1} alt="Client Logo" />
-              <img src={client2} alt="Client Logo" />
-              <img src={client3} alt="Client Logo" />
-              <img src={client4} alt="Client Logo" />
-              <img src={client5} alt="Client Logo" />
-              <img src={client6} alt="Client Logo" />
-              <img src={client7} alt="Client Logo" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5 */}
-      <div className="wrapper2">
-        <div className="image-container2">
-          <img src={banner3} className="banner3" alt="Banner" />
-          <div className="image-content2">
-            <div className="content-inner2">
-              <h1>
-                The Cibos<sup>TM</sup> Setup - Ecosystem for Micro-Entrepreneurs
-              </h1>
-              <p>
-                The streets never rest, and neither should opportunities for
-                micro-entrepreneurs. Cibos provides the infrastructure,
-                technology, and digital tools that empower vendors to run their
-                businesses efficiently and sustainably.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Section 6 - New Vendor & Product Section */}
-      {/* Laari Showcase Section */}
-      <section id="laari-section">
-        <LaariShowcase />
-      </section>
-
-      {/* Clean Cooking Showcase Section */}
-      <section id="clean-cooking-section">
-        <CleanCookingShowcase />
-      </section>
-
-      {/* Temperature Controlled Delivery Showcase Section */}
-      <section id="temperature-controlled-section">
-        <CoolingBoxShowcase />
-      </section>
-
-      {/* Digital Platform Showcase Section */}
-      <section id="digital-platform-section">
-        <LaariKhojoShowcase />
-      </section>
-
-      {/* SUPPORTED BY */}
-      <section className="customers-partners-section">
-        <h2 className="customers-partners-title">Supported by</h2>
-        <div className="customers-partners-logos">
-          <img src={s1} alt="" />
-          <img src={s2} alt="" />
-          <img src={s3} alt="" />
-          <img src={s4} alt="" />
-          <img src={s5} alt="" />
-          <img src={s6} alt="" />
-          <img src={s7} alt="" />
-          <img src={s8} alt="" />
-          <img src={s9} alt="" />
-          <img src={s10} alt="" />
-          <img src={s11} alt="" />
-          <img src={s12} alt="" />
-          <img src={s13} alt="" />
-          <img src={s14} alt="" />
-          <img src={s15} alt="" />
-          <img src={s16} alt="" />
-        </div>
-      </section>
-
-      <section id="achievements-section">
-        <div className="achievements-container">
-          <div className="achievements-grid">
-            <div className="achievement-item1">
-              <img src={a1} alt="SolarX Startup Challenge Winners" />
-              <div className="achievement-description">
-                <h1>Winners</h1>
+        {/* Lower Hero Content 
+        <div className="lower-hero-content">
+          <div className="image-container">
+            <img src={streetVendorImage} className="street-vendor-image" alt="Street Vendor" />
+            <div className="image-overlay">
+              <div className="overlay-content" ref={overlayContentRef}>
+                <h2>The Cibos Setup - Ecosystem for Micro-Entrepreneurs</h2>
                 <p>
-                  of the SolarX Startup Challenge by the International Solar
-                  Alliance. Presented solutions to the Honorable Prime Minister
-                  of India, Ministry of New and Renewable Energy, German
-                  Minister of Energy, and other global leaders. Recognized as a
-                  leading innovator in clean energy and sustainable
-                  entrepreneurship.
+                  Carts that unfold, stoves that cook smokeless, cooling that runs off-grid and a digital app to 
+                  power discovery, permits and loans. Making for India's 38 million micro-entrepreneurs—street-
+                  smart, solar-ready, and loan-approved.
                 </p>
               </div>
             </div>
-            <div className="achievement-small-grid">
-              <div className="achievement-item2">
-                <img src={a2} alt="Top 10 Startup in SolarX Challenge" />
-                <div className="achievement-description">
-                  <p>
-                    Recognized as a Top 10 Startup in SolarX Challenge 2024 with
-                    $15,000 prize
-                  </p>
-                </div>
-              </div>
-              <div className="achievement-item3">
-                <img src={a4} alt="Hot Plates Deployment" />
-                <div className="achievement-description">
-                  <p>
-                    Deployed 20+ Hot plates at Ministry of New and Renewable
-                    Energy and International Solar Alliance
-                  </p>
-                </div>
-              </div>
-              <div className="achievement-item4">
-                <img src={a5} alt="Founder Presentation" />
-                <div className="achievement-description">
-                  <p>
-                    Our Founder Mr. Aditya Dave explaining the Hot Plate to
-                    German Ministers and dignitaries
-                  </p>
-                </div>
-              </div>
-              <div className="achievement-item5">
-                <img src={a3} alt="News and Media Coverage" />
-                <div className="achievement-description">
-                  <p>
-                    News and Social Media coverage of Re-Invest 2024 Summit at
-                    Gandhinagar
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </section>
+      </div>*/}
 
-      <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-logo">
-            <img src={logo} alt="" className="Cibos-logo" />
-          </div>
-          <div className="footer-contact">
-            <div className="footer-contact-item">
-              <img className="footer-icon" src={phoneIcon} />
-              <span>+91 6353050357</span>
-            </div>
-            <div className="footer-contact-item">
-              <img className="footer-icon" src={mailIcon} />
-              <span>aditya@cibos.in</span>
-            </div>
-            <div className="footer-contact-item">
-              <img src={locationIcon} alt="" className="footer-icon" />
-              <span>Ahmedabad</span>
-            </div>
+
+
+<div className="lower-hero-content">
+  <div className="stats-container">
+    <div className="stats-grid">
+      <div className="stat-item">
+        <div className="stat-number">500+</div>
+        <div className="stat-description">Food Carts, Kiosks, <br />Pods & Trucks Sold</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">160+</div>
+        <div className="stat-description">Clean Cooking<br/> Devices Sold</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">800+</div>
+        <div className="stat-description">Vendors on Laari <br />Khojo Platform</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">6</div>
+        <div className="stat-description">Intellectual<br/> Property Filed</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
+    
+
+        {/* Section 3 */}
+         <section id="products">
+        <div className="product-categories">
+          <div className="categories-container">
+            <button
+              className="category-item"
+              onClick={() =>
+                (
+                  document.getElementById("laari-section") as HTMLElement
+                ).scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              <img src={laariIcon} alt="LAARI" className="category-icon" />
+              <h3 className="category-title">
+                LAARI<span className='tm'>TM</span>
+              </h3>
+              <p className="category-desc">Carts, Kiosk, Pods and Trucks</p>
+              <p className="category-desc">for Food and Retail</p>
+            </button>
+
+            <button
+              className="category-item"
+              onClick={() =>
+                (
+                  document.getElementById("clean-cooking-section") as HTMLElement
+                ).scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              <img
+                src={cookingIcon}
+                alt="Clean Cooking"
+                className="category-icon"
+              />
+              <h3 className="category-title">Clean Cooking</h3>
+              <p className="category-desc">Solar-Powered Cookstoves</p>
+              <p className="category-desc">Infrared Cookstoves</p>
+            </button>
+
+            <button
+              className="category-item"
+              onClick={() =>
+                (
+                  document.getElementById(
+                    "digital-platform-section"
+                  ) as HTMLElement
+                ).scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              <img
+                src={digitalIcon}
+                alt="Digital Platform"
+                className="category-icon"
+              />
+              <h3 className="category-title">Digital Platform</h3>
+              <p className="category-desc">Vendor Discovery Platform</p>
+              <p className="category-desc">WhatsApp-Based Vendor Support</p>
+            </button>
+
+            <button
+              className="category-item"
+              onClick={() =>
+                (
+                  document.getElementById(
+                    "temperature-controlled-section"
+                  ) as HTMLElement
+                ).scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              <img
+                src={deliveryIcon}
+                alt="Temperature Controlled Delivery"
+                className="category-icon"
+              />
+              <h3 className="category-title">Clean Cooling</h3>
+              <p className="category-desc">Off-Grid Cold Boxes</p>
+              <p className="category-desc">DC Micro-Compressors</p>
+            </button>
           </div>
         </div>
-      </footer>
+    </section>        
+
+    {/* Section 4 */}
+                 
+          <div className="slider-title">
+            {/*<h1>Our Clients</h1> */}
+            <div className="slider">
+              <div className="slider-items">
+                <img src={client1} alt="Client Logo" />
+                <img src={client2} alt="Client Logo" />
+                <img src={client3} alt="Client Logo" />
+                <img src={client4} alt="Client Logo" />
+                <img src={client5} alt="Client Logo" />
+                <img src={client6} alt="Client Logo" />
+                <img src={client7} alt="Client Logo" />
+              </div>
+            </div>
+          </div>  
+        
+
+        {/* Section 5 
+        <div className="wrapper2">
+          <div className="image-container2">
+            <img src={banner3} className="banner3" alt="Banner" />
+            <div className="image-content2">
+              <div className="content-inner2">
+                <h1>
+                  The Cibos<sup>TM</sup> Setup - Ecosystem for Micro-Entrepreneurs
+                </h1>
+                <p>
+                  The streets never rest, and neither should opportunities for
+                  micro-entrepreneurs. Cibos provides the infrastructure,
+                  technology, and digital tools that empower vendors to run their
+                  businesses efficiently and sustainably.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>*/}
+
+        {/* Section 6 - New Vendor & Product Section */}
+        {/* Laari Showcase Section */}
+        <section id="laari-section">
+          <LaariShowcase />
+        </section>
+
+        {/* Clean Cooking Showcase Section */}
+        <section id="clean-cooking-section">
+          <CleanCookingShowcase />
+        </section>
+
+        {/* Temperature Controlled Delivery Showcase Section */}
+        <section id="temperature-controlled-section">
+          <CoolingBoxShowcase />
+        </section>
+
+        {/* Digital Platform Showcase Section */}
+        <section id="digital-platform-section">
+          <LaariKhojoShowcase />
+        </section>
+
+        {/* SUPPORTED BY */}
+        <section className="customers-partners-section">
+          <h2 className="customers-partners-title">Supported by</h2>
+          <div className="customers-partners-logos">
+            <img src={s1} alt="" />
+            <img src={s2} alt="" />
+            <img src={s3} alt="" />
+            <img src={s4} alt="" />
+            <img src={s5} alt="" />
+            <img src={s6} alt="" />
+            <img src={s7} alt="" />
+            <img src={s8} alt="" />
+            <img src={s9} alt="" />
+            <img src={s10} alt="" />
+            <img src={s11} alt="" />
+            <img src={s12} alt="" />
+            <img src={s13} alt="" />
+            <img src={s14} alt="" />
+            <img src={s15} alt="" />
+            <img src={s16} alt="" />
+          </div>
+        </section>
+
+        <section id="achievements-section">
+          <div className="achievements-container">
+            <div className="achievements-grid">
+              <div className="achievement-item1">
+                <img src={a1} alt="SolarX Startup Challenge Winners" />
+                <div className="achievement-description">
+                  <h1>Winners</h1>
+                  <p>
+                    of the SolarX Startup Challenge by the International Solar
+                    Alliance. Presented solutions to the Honorable Prime Minister
+                    of India, Ministry of New and Renewable Energy, German
+                    Minister of Energy, and other global leaders. Recognized as a
+                    leading innovator in clean energy and sustainable
+                    entrepreneurship.
+                  </p>
+                </div>
+              </div>
+              <div className="achievement-small-grid">
+                <div className="achievement-item2">
+                  <img src={a2} alt="Top 10 Startup in SolarX Challenge" />
+                  <div className="achievement-description">
+                    <p>
+                      Recognized as a Top 10 Startup in SolarX Challenge 2024 with
+                      $15,000 prize
+                    </p>
+                  </div>
+                </div>
+                <div className="achievement-item3">
+                  <img src={a4} alt="Hot Plates Deployment" />
+                  <div className="achievement-description">
+                    <p>
+                      Deployed 20+ Hot plates at Ministry of New and Renewable
+                      Energy and International Solar Alliance
+                    </p>
+                  </div>
+                </div>
+                <div className="achievement-item4">
+                  <img src={a5} alt="Founder Presentation" />
+                  <div className="achievement-description">
+                    <p>
+                      Our Founder Mr. Aditya Dave explaining the Hot Plate to
+                      German Ministers and dignitaries
+                    </p>
+                  </div>
+                </div>
+                <div className="achievement-item5">
+                  <img src={a3} alt="News and Media Coverage" />
+                  <div className="achievement-description">
+                    <p>
+                      News and Social Media coverage of Re-Invest 2024 Summit at
+                      Gandhinagar
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section id="contact-us">
+        <footer className="footer">
+          <div className="footer-container">
+            <div className="footer-logo">
+              <img src={logo} alt="" className="Cibos-logo" />
+            </div>
+            <div className="footer-contact">
+              <div className="footer-contact-item">
+                <img className="footer-icon" src={phoneIcon} />
+                <span>+91 6353050357</span>
+              </div>
+              <div className="footer-contact-item">
+                <img className="footer-icon" src={mailIcon} />
+                <span>aditya@cibos.in</span>
+              </div>
+              <div className="footer-contact-item">
+                <img src={locationIcon} alt="" className="footer-icon" />
+                <span>Ahmedabad</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </section>
     </>
   );
 }

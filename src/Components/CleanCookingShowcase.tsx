@@ -9,6 +9,18 @@ import ir3 from "../assets/c-ir3.png";
 import a1 from "../assets/c-a1.png";
 import a2 from "../assets/c-a2.png";
 
+import cool1 from "../assets/temp1.png";
+import cool2 from "../assets/temp2.png";
+import cool3 from "../assets/temp3.png";
+import cool4 from "../assets/temp4.png";
+import cool5 from "../assets/temp5.png";
+
+import fireIcon from "../assets/fireIcon.png";
+import deliveryIcon from "../assets/deliveryIcon1.png"; // Placeholder path
+import streetVendorIcon from "../assets/streetVendorIcon.png"; // Placeholder path
+import alertIcon from "../assets/alertIcon.png"; // Placeholder path
+
+
 import energyIcon from "../assets/energyIcon.png";
 import heatIcon from "../assets/heatingIcon.png";
 import safetyIcon from "../assets/safetyIcon.png";
@@ -17,6 +29,10 @@ import sleekIcon from "../assets/sleekIcon.png";
 import operationIcon from "../assets/operationIcon.png";
 import batteryIcon from "../assets/batteryIcon.png";
 import smartIcon from "../assets/smartIcon.png";
+
+import portableIcon from "../assets/portableIcon.png";
+import safety1Icon from "../assets/safety1Icon.png";
+import costIcon from "../assets/costIcon.png";
 
 interface ListItem {
   text: string;
@@ -36,15 +52,43 @@ interface TabContent {
 }
 
 const TABS = [
-  "IR Cooking",
-  "Solar cooking",
+  "Off-Grid Solar Cooktop",
+  "On-Grid Infrared Cooktop",
+  "Heated delivery box",
+
 ];
 
 const tabContent: TabContent[] = [
-  // Orza Infrared Cooktop Clean Cooking
   {
-    title: "ORZA",
-    subtitle: "Infrared Cooktop Clean Cooking",
+    title: "Clean Cooking",
+    subtitle: "Proprietary Technology for True Off-Grid Cooking",
+    infoBar: ["Cook without limits. No dependence on fuel or unreliable electricity."],
+    leftTitle: "Key Features",
+    leftList: [
+      "Scratch-resistant crystal glass plate",
+      "Outlets for connecting battery and solar panel",
+      "Temperature/power control knob",
+      "After charging battery runs up to 3 and a half hours",
+      "4 cooking modes",
+    ],
+    leftTitle2: "Use cases and applications",
+    leftList2: [
+      { text: "For rural women" },
+      { text: "For travellers" },
+      { text: "For carbon credit companies" },
+    ],
+    images: [a1, a2], // Placeholder image
+    rightFeatures: [
+      { icon: operationIcon, text: "Truly Off-Grid Operation" }, // Placeholder icon
+      { icon: safetyIcon, text: "Safe & Clean Cooking" }, // Placeholder icon
+      { icon: batteryIcon, text: "Battery-Compatible for Night Use" }, // Placeholder icon
+      { icon: smartIcon, text: "Smart Usage Monitoring (Optional)" }, // Placeholder icon
+    ],
+  },
+  // Agnit Solar powered cooktop
+  {
+    title: "Clean Cooking",
+    subtitle: "Proprietary Technology for True Off-Grid Cooking",
     infoBar: ["Faster heating, lower energy consumption, and safer use."],
     leftTitle: "Key Features",
     leftList: [
@@ -69,31 +113,31 @@ const tabContent: TabContent[] = [
       { icon: sleekIcon, text: "Sleek Design" }, // Placeholder icon
     ],
   },
-  // Agnit Solar powered cooktop
+
+  // Heated delivery box content from image
   {
-    title: "AGNIT",
-    subtitle: "Solar powered cooktop",
-    infoBar: ["Cook without limits. No dependence on fuel or unreliable electricity."],
+    title: "Clean Cooking",
+    subtitle: "Proprietary Technology for True Off-Grid Cooking",
+    infoBar: ["Battery operated solar powered retrofittable hotbox that can reach up to a temperature of 150 degree Celsius to keep food hot"],
     leftTitle: "Key Features",
     leftList: [
-      "Scratch-resistant crystal glass plate",
-      "Outlets for connecting battery and solar panel",
-      "Temperature/power control knob",
-      "After charging battery runs up to 3 and a half hours",
-      "4 cooking modes",
+      "Battery charging time is 2 hours",
+      "Runs up to 6 hours on one charge",
+      "Compatible with solar",
+      "PTC element for efficient, even cooking",
     ],
     leftTitle2: "Use cases and applications",
     leftList2: [
-      { text: "For rural women" },
-      { text: "For travellers" },
-      { text: "For carbon credit companies" },
+      { text: "Food delivery", icon: deliveryIcon }, // Assuming deliveryIcon is the correct icon for heated food delivery
+      { text: "Street vending", icon: streetVendorIcon }, // Assuming streetVendorIcon is correct for heated street vending
+      { text: "Defense, emergency and disaster relief", icon: alertIcon }, // Assuming alertIcon is correct for heated defense/emergency
     ],
-    images: [a1, a2], // Placeholder image
+    images: [cool1, cool2, cool3, cool4, cool5], // Use imported heated images
     rightFeatures: [
-      { icon: operationIcon, text: "Truly Off-Grid Operation" }, // Placeholder icon
-      { icon: safetyIcon, text: "Safe & Clean Cooking" }, // Placeholder icon
-      { icon: batteryIcon, text: "Battery-Compatible for Night Use" }, // Placeholder icon
-      { icon: smartIcon, text: "Smart Usage Monitoring (Optional)" }, // Placeholder icon
+      { icon: fireIcon, text: "Proprietary heating technology" }, // Use imported icon
+      { icon: portableIcon, text: "Portable" }, // Use imported icon
+      { icon: safety1Icon, text: "Improved safety measures" }, // Use imported icon
+      { icon: costIcon, text: "Cost - effective" }, // Use imported icon
     ],
   },
 ];
@@ -423,6 +467,9 @@ const FeatureItem = styled.div`
   p {
     font-size: 10px;
     margin-top: 4px;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.6;
   }
 `;
 
@@ -771,13 +818,18 @@ export default function CleanCookingShowcase() {
 
                   {/* Desktop Features */}
                   <DesktopFeatures>
-                    {tab.rightFeatures.map((f, i) => (
-                      <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
-                        <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
-                        <p>{f.text}</p>
-                      </motion.div>
-                    ))}
-                  </DesktopFeatures>
+  {tab.rightFeatures.map((f, i) => (
+    <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
+      <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
+      <p style={{ 
+        fontSize: "15px",
+        color: "#555",
+        fontWeight: 400,
+        lineHeight: 1.6
+      }}>{f.text}</p>
+    </motion.div>
+  ))}
+</DesktopFeatures>
                 </ContentGrid>
               </motion.div>
             </AnimatePresence>

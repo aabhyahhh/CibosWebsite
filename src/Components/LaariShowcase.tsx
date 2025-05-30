@@ -651,6 +651,9 @@ const FeatureItem = styled.div`
   p {
     font-size: 10px;
     margin-top: 4px;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.6;
   }
 `;
 
@@ -999,13 +1002,18 @@ export default function LaariShowcase() {
 
                   {/* Desktop Features */}
                   <DesktopFeatures>
-                    {tab.rightFeatures.map((f, i) => (
-                      <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
-                        <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
-                        <p>{f.text}</p>
-                      </motion.div>
-                    ))}
-                  </DesktopFeatures>
+  {tab.rightFeatures.map((f, i) => (
+    <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
+      <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
+      <p style={{ 
+        fontSize: "15px",
+        color: "#555",
+        fontWeight: 400,
+        lineHeight: 1.6
+      }}>{f.text}</p>
+    </motion.div>
+  ))}
+</DesktopFeatures>
                 </ContentGrid>
               </motion.div>
             </AnimatePresence>

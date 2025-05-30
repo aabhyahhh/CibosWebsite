@@ -32,11 +32,37 @@ interface TabContent {
 }
 
 const TABS = [
-  "Street Vendor Discovery Webapp",
   "WhatsApp Workflow for Street Vendors",
+  "Street Vendor Discovery Webapp",
 ];
 
 const tabContent: TabContent[] = [
+
+  // Placeholder for WhatsApp Workflow for Street Vendors content
+  {
+    title: "LAARI™ Khojo",
+    subtitle: "WhatsApp Workflow for Street Vendors",
+    infoBar: ["Vendor discovery, government support and business enablement platform"],
+    leftTitle: "Key Features",
+    leftList: [
+      "Real-time location sharing with customers",
+      "Easy license & loan application",
+      "Daily updates to boost visibility & trust",
+    ],
+    leftTitle2: "Use Cases and Applications",
+    leftList2: [
+      { text: "Fleet Tracking and Optimization" },
+      { text: "Loans and Licenses for Street Vendors" },
+      { text: "Smart Governance" },
+    ],
+    images: [khojoWhatsapp], // Placeholder main image
+    rightFeatures: [
+      { icon: manageIcon, text: "Manages financial aspects" },
+      { icon: listIcon, text: "Verified Suppliers List" },
+      { icon: shareFeedbackIcon, text: "Share Feedbacks" },
+      { icon: connectIcon, text: "Easy to connect" },
+    ],
+  },
   // Street Vendor Discovery Webapp content from image
   {
     title: "LAARI™ Khojo",
@@ -44,8 +70,8 @@ const tabContent: TabContent[] = [
     infoBar: ["Vendor discovery, government support and business enablement platform"],
     leftTitle: "Key Features",
     leftList: [
-      "Connects Street Vendors with Customers in Real-Time",
-      "View Updated Vendor Details, Including Menu, Hours, and Ratings",
+      "Connects Customers with Street Vendors in Real-Time",
+      "View Menu, Hours, and Ratings",
       "Support Local Businesses by Choosing Verified Vendors.",
     ],
     leftTitle2: "Use Cases and Applications",
@@ -63,33 +89,7 @@ const tabContent: TabContent[] = [
       { icon: verifiedIcon, text: "Verified and Trusted" }, // Placeholder icon
     ],
   },
-  // Placeholder for WhatsApp Workflow for Street Vendors content
-  {
-    title: "LAARI™ Khojo",
-    subtitle: "WhatsApp Workflow for Street Vendors",
-    infoBar: ["Vendor discovery, government support and business enablement platform"],
-    leftTitle: "Key Features",
-    leftList: [
-      "Real-time location sharing with customers",
-      "Easy license & loan application support",
-      "Direct access to verified suppliers",
-      "Daily updates to boost visibility & trust",
-    ],
-    leftTitle2: "Use Cases and Applications",
-    leftList2: [
-      { text: "New Vendor Starting a Street Food Stall" },
-      { text: "Existing Vendor Relocating to a New Spot" },
-      { text: "Vendor Preparing for a Festive Festive Season Rush" },
-      { text: "Vendor Applying for Hygiene Certification" },
-    ],
-    images: [khojoWhatsapp], // Placeholder main image
-    rightFeatures: [
-      { icon: manageIcon, text: "Manages financial aspects" },
-      { icon: listIcon, text: "Verified Suppliers List" },
-      { icon: shareFeedbackIcon, text: "Share Feedbacks" },
-      { icon: connectIcon, text: "Easy to connect" },
-    ],
-  },
+  
 ];
 
 // SimpleCarousel component for center images
@@ -417,6 +417,9 @@ const FeatureItem = styled.div`
   p {
     font-size: 10px;
     margin-top: 4px;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.6;
   }
 `;
 
@@ -765,13 +768,18 @@ export default function LaariKhojoShowcase() {
 
                   {/* Desktop Features */}
                   <DesktopFeatures>
-                    {tab.rightFeatures.map((f, i) => (
-                      <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
-                        <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
-                        <p>{f.text}</p>
-                      </motion.div>
-                    ))}
-                  </DesktopFeatures>
+  {tab.rightFeatures.map((f, i) => (
+    <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
+      <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
+      <p style={{ 
+        fontSize: "15px",
+        color: "#555",
+        fontWeight: 400,
+        lineHeight: 1.6
+      }}>{f.text}</p>
+    </motion.div>
+  ))}
+</DesktopFeatures>
                 </ContentGrid>
               </motion.div>
             </AnimatePresence>

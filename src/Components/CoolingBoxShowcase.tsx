@@ -2,11 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import styled from "styled-components";
 
-import cool1 from "../assets/temp1.png";
-import cool2 from "../assets/temp2.png";
-import cool3 from "../assets/temp3.png";
-import cool4 from "../assets/temp4.png";
-import cool5 from "../assets/temp5.png";
+
 
 import heat1 from "../assets/temp6.png";
 import heat2 from "../assets/temp7.png";
@@ -26,7 +22,6 @@ import agriculturalIcon from "../assets/agriculturalIcon.png"; // Placeholder pa
 import pharmaIcon from "../assets/pharmaIcon.png"; // Placeholder path for factory icon
 
 // Add import for the fire icon and DC-1 image
-import fireIcon from "../assets/fireIcon.png";
 import dc1Image from "../assets/Dc-1.png";
 // Ensure you have actual assets at these paths or update the paths
 
@@ -49,42 +44,15 @@ interface TabContent {
 }
 
 const TABS = [
-  "Heated delivery box",
-  "Cold delivery box", // Placeholder tab
+  "Off-Grid Cold Boxes", // Placeholder tab
   "DC Compressor"
 ];
 
 const tabContent = [
-  // Heated delivery box content from image
-  {
-    title: "CIBOS™",
-    subtitle: "Temperature controlled delivery box",
-    infoBar: ["Battery operated solar powered retrofittable hotbox that can reach up to a temperature of 150 degree Celsius to keep food hot"],
-    leftTitle: "Key Features",
-    leftList: [
-      "12 V DC compressor used",
-      "Battery charging time is 2 hours",
-      "Runs up to 6 hours on one charge",
-      "Compatible with solar",
-      "PTC element for efficient, even cooking",
-    ],
-    leftTitle2: "Use cases and applications",
-    leftList2: [
-      { text: "Food delivery", icon: deliveryIcon }, // Assuming deliveryIcon is the correct icon for heated food delivery
-      { text: "Street vending", icon: streetVendorIcon }, // Assuming streetVendorIcon is correct for heated street vending
-      { text: "Defense, emergency and disaster relief", icon: alertIcon }, // Assuming alertIcon is correct for heated defense/emergency
-    ],
-    images: [cool1, cool2, cool3, cool4, cool5], // Use imported heated images
-    rightFeatures: [
-      { icon: fireIcon, text: "Proprietary heating technology" }, // Use imported icon
-      { icon: portableIcon, text: "Portable" }, // Use imported icon
-      { icon: safety1Icon, text: "Improved safety measures" }, // Use imported icon
-      { icon: costIcon, text: "Cost - effective" }, // Use imported icon
-    ],
-  },
+  
   // Placeholder for Cold delivery box content
   {
-    title: "CIBOS™",
+    title: "Clean Cooling",
     subtitle: "Temperature Controlled Delivery Box",
     infoBar: ["Battery-operated solar powered cool box to preserve perishables in off-grid manner"],
     leftTitle: "Key Features",
@@ -111,8 +79,8 @@ const tabContent = [
     ],
   },
   {
-    title: "CIBOS™",
-    subtitle: "DC Cooling System For Future",
+    title: "Clean Cooling",
+    subtitle: "DC Cooling Technology for Scale",
     infoBar: ["DC compressors made in India for the world with multiple applications"],
     leftTitle: "Key Features",
     leftList: [
@@ -463,6 +431,9 @@ const FeatureItem = styled.div`
   p {
     font-size: 10px;
     margin-top: 4px;
+    color: #555;
+    font-weight: 400;
+    line-height: 1.6;
   }
 `;
 
@@ -811,13 +782,18 @@ export default function CoolingBoxShowcase() {
 
                   {/* Desktop Features */}
                   <DesktopFeatures>
-                    {tab.rightFeatures.map((f, i) => (
-                      <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
-                        <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
-                        <p>{f.text}</p>
-                      </motion.div>
-                    ))}
-                  </DesktopFeatures>
+  {tab.rightFeatures.map((f, i) => (
+    <motion.div key={i} variants={itemFadeIn} style={{ textAlign: "center", marginBottom: 50 }}>
+      <img src={f.icon} alt={f.text} style={{ width: 40, height: 40 }} />
+      <p style={{ 
+        fontSize: "15px",
+        color: "#555",
+        fontWeight: 400,
+        lineHeight: 1.6
+      }}>{f.text}</p>
+    </motion.div>
+  ))}
+</DesktopFeatures>
                 </ContentGrid>
               </motion.div>
             </AnimatePresence>

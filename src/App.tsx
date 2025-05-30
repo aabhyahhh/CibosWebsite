@@ -112,12 +112,12 @@ function App() {
         {/* Upper Hero Content */}
         <div className="upper-hero-content">
           <div className="hero-text-content">
-            <p className="impact-text">★ Impacting More Than 500 Geographical Locations</p>
+            <p className="impact-text">Built on Deep-Tech Innovation</p>
             <h1 className="hero-title">
-              <span className="clean-tech">Clean Technology For</span><br />
-              <span className="micro-entrepreneurs">Micro Entrepreneurs</span>
+              <span className="clean-tech">Plug & Play Hardware,<br/>Clean Energy, and Digital Stack for</span><br />
+              <span className="micro-entrepreneurs">Street Vendors</span>
             </h1>
-            <p className="subtitle">Making for India's 38 million micro-entrepreneurs—street-smart,<br />solar-ready, and loan-approved.</p>
+            <p className="subtitle">Empowering 38 million Indian vendors to<br />sell-more, save on energy, keep food fresh longer and gain easy permits & credit</p>
           </div>
         </div>
 
@@ -139,22 +139,32 @@ function App() {
         </div>
       </div>*/}
 
-        {/* Section 4 */}
-                 
-          <div className="slider-title">
-            {/*<h1>Our Clients</h1> */}
-            <div className="slider">
-              <div className="slider-items">
-                <img src={client1} alt="Client Logo" />
-                <img src={client2} alt="Client Logo" />
-                <img src={client3} alt="Client Logo" />
-                <img src={client4} alt="Client Logo" />
-                <img src={client5} alt="Client Logo" />
-                <img src={client6} alt="Client Logo" />
-                <img src={client7} alt="Client Logo" />
-              </div>
-            </div>
-          </div>
+
+
+<div className="lower-hero-content">
+  <div className="stats-container">
+    <div className="stats-grid">
+      <div className="stat-item">
+        <div className="stat-number">500+</div>
+        <div className="stat-description">Food Carts, Kiosks, <br />Pods & Trucks Sold</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">160+</div>
+        <div className="stat-description">Clean Cooking<br/> Devices Sold</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">800+</div>
+        <div className="stat-description">Vendors on Laari <br />Khojo Platform</div>
+      </div>
+      <div className="stat-item">
+        <div className="stat-number">6</div>
+        <div className="stat-description">Intellectual<br/> Property Filed</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+        
     
 
         {/* Section 3 */}
@@ -171,10 +181,10 @@ function App() {
             >
               <img src={laariIcon} alt="LAARI" className="category-icon" />
               <h3 className="category-title">
-                LAARI<sup>TM</sup>
+                LAARI<span className='tm'>TM</span>
               </h3>
-              <p className="category-desc">Food Carts, Kiosks & Pods</p>
-              <p className="category-desc">Portable Retail Shops</p>
+              <p className="category-desc">Carts, Kiosk, Pods and Trucks</p>
+              <p className="category-desc">for Food and Retail</p>
             </button>
 
             <button
@@ -230,13 +240,30 @@ function App() {
                 alt="Temperature Controlled Delivery"
                 className="category-icon"
               />
-              <h3 className="category-title">Temperature Controlled Delivery</h3>
-              <p className="category-desc">Portable Heating Boxes</p>
-              <p className="category-desc">Portable Cooling Boxes</p>
+              <h3 className="category-title">Clean Cooling</h3>
+              <p className="category-desc">Off-Grid Cold Boxes</p>
+              <p className="category-desc">DC Micro-Compressors</p>
             </button>
           </div>
         </div>
-    </section>          
+    </section>        
+
+    {/* Section 4 */}
+                 
+          <div className="slider-title">
+            {/*<h1>Our Clients</h1> */}
+            <div className="slider">
+              <div className="slider-items">
+                <img src={client1} alt="Client Logo" />
+                <img src={client2} alt="Client Logo" />
+                <img src={client3} alt="Client Logo" />
+                <img src={client4} alt="Client Logo" />
+                <img src={client5} alt="Client Logo" />
+                <img src={client6} alt="Client Logo" />
+                <img src={client7} alt="Client Logo" />
+              </div>
+            </div>
+          </div>  
         
 
         {/* Section 5 
